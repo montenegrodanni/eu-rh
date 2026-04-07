@@ -8,30 +8,20 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from flask import Flask
-import os
-
-app = Flask(__name__)  # 🔥 PRIMEIRO cria o app
-
-UPLOAD_FOLDER = "uploads"
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER  # 🔥 DEPOIS usa o app
-
 
 app = Flask(__name__)
 app.secret_key = 'eurh_chave_secreta'
-
-app.config['EMAIL_REMETENTE'] = 'montenegro10.daniel@gmail.com'
-app.config['EMAIL_SENHA'] = 'aqmwzwzoowyqxyzz'
-app.config['SMTP_SERVIDOR'] = 'smtp.gmail.com'
-app.config['SMTP_PORTA'] = 587
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, 'banco.db')
 
 app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, 'uploads')
 app.config['ALLOWED_EXTENSIONS'] = {'pdf'}
+
+app.config['EMAIL_REMETENTE'] = 'montenegro10.daniel@gmail.com'
+app.config['EMAIL_SENHA'] = 'aqmwzwzoowyqxyzz'
+app.config['SMTP_SERVIDOR'] = 'smtp.gmail.com'
+app.config['SMTP_PORTA'] = 587
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
@@ -137,40 +127,6 @@ def home():
     return render_template('home.html')
 
 
-def calcular_score(candidato, vaga):
-    score = 0
-
-    # Escolaridade
-    escolaridade_pontos = {
-        "fundamental": 10,
-        "medio": 20,
-        "superior": 30,
-        "pos": 40
-    }
-    score += escolaridade_pontos.get(candidato['escolaridade'], 0)
-
-    # Experiência
-    anos = candidato['experiencia']
-    if anos >= 3:
-        score += 30
-    elif anos >= 1:
-        score += 20
-    else:
-        score += 10
-
-    # Localização
-    if candidato['cidade'] == vaga['localizacao']:
-        score += 20
-    else:
-        score += 5
-
-    # Disponibilidade
-    if candidato['disponibilidade'] == "imediata":
-        score += 10
-    else:
-        score += 5
-
-    return score
 
 @app.route('/login', methods=['GET', 'POST'])
 def pagina_login():
@@ -217,15 +173,16 @@ def ver_candidatos(vaga_id):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    # buscar vaga da empresa
-    cursor.execute('SELECT * FROM vagas WHERE id = ? AND empresa_id = ?', (vaga_id, empresa_id))
+    cursor.execute(
+        'SELECT * FROM vagas WHERE id = ? AND empresa_id = ?',
+        (vaga_id, empresa_id)
+    )
     vaga = cursor.fetchone()
 
     if not vaga:
         conn.close()
         return "Vaga não encontrada."
 
-    # contagem por status
     cursor.execute('''
         SELECT status, COUNT(*) as total
         FROM candidatos
@@ -242,12 +199,11 @@ def ver_candidatos(vaga_id):
         'Reprovado': 0
     }
 
-    for item in contagem_status_db:
-        contagem_status[item['status']] = item['total']
+    for row in contagem_status_db:
+        contagem_status[row['status']] = row['total']
 
     total_candidatos = sum(contagem_status.values())
 
-    # filtrar candidatos
     if status_filtro == 'Todos':
         cursor.execute('''
             SELECT * FROM candidatos
@@ -261,8 +217,20 @@ def ver_candidatos(vaga_id):
             ORDER BY id DESC
         ''', (vaga_id, status_filtro))
 
-    candidatos = cursor.fetchall()
+    candidatos_db = cursor.fetchall()
     conn.close()
+
+    candidatos = []
+    for candidato in candidatos_db:
+        score, motivos = calcular_score(vaga, candidato)
+
+        candidato_dict = dict(candidato)
+        candidato_dict['score'] = score
+        candidato_dict['motivos'] = motivos
+
+        candidatos.append(candidato_dict)
+
+    candidatos.sort(key=lambda x: x['score'], reverse=True)
 
     return render_template(
         'candidatos.html',

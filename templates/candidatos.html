@@ -334,59 +334,55 @@
 </div>
 
     {% for item in candidatos %}
-    <div class="card">
+<div class="card-candidato">
 
-      <div class="card-topo">
-
-        <div class="topo-esquerda">
-          <div class="foto-candidato">
-            <img src="https://via.placeholder.com/80" alt="Foto do candidato">
-          </div>
-
-          <div class="card-info">
-            <h3>{{ item.dados[2] }}</h3>
-            <p>📧 {{ item.dados[3] }}</p>
-            <p>📞 {{ item.dados[4] }}</p>
-          </div>
+    <div class="topo-card">
+        <div class="card-info">
+            <h3>{{ item['nome'] }}</h3>
+            <p>📧 {{ item['email'] }}</p>
+            <p>📞 {{ item['telefone'] }}</p>
         </div>
 
-        <div class="lado-direito">
-          <span class="status
-            {% if item.dados[7] == 'Recebido' %}recebido{% endif %}
-            {% if item.dados[7] == 'Em análise' %}analise{% endif %}
-            {% if item.dados[7] == 'Entrevista' %}entrevista{% endif %}
-            {% if item.dados[7] == 'Aprovado' %}aprovado{% endif %}
-            {% if item.dados[7] == 'Reprovado' %}reprovado{% endif %}
-          ">
-            {{ item.dados[7] or 'Recebido' }}
-          </span>
+        <div class="status-box">
+            <span class="status-tag 
+                {% if item['status'] == 'Recebido' %}status-recebido{% endif %}
+                {% if item['status'] == 'Em análise' %}status-analise{% endif %}
+                {% if item['status'] == 'Entrevista' %}status-entrevista{% endif %}
+                {% if item['status'] == 'Aprovado' %}status-aprovado{% endif %}
+                {% if item['status'] == 'Reprovado' %}status-reprovado{% endif %}
+            ">
+                {{ item['status'] }}
+            </span>
 
-          <form method="POST" action="{{ url_for('atualizar_status_candidato', id=item.dados[0]) }}" class="form-status">
-            <select name="status" class="select-status">
-              <option value="Recebido" {% if item.dados[7] == 'Recebido' %}selected{% endif %}>Recebido</option>
-              <option value="Em análise" {% if item.dados[7] == 'Em análise' %}selected{% endif %}>Em análise</option>
-              <option value="Entrevista" {% if item.dados[7] == 'Entrevista' %}selected{% endif %}>Entrevista</option>
-              <option value="Aprovado" {% if item.dados[7] == 'Aprovado' %}selected{% endif %}>Aprovado</option>
-              <option value="Reprovado" {% if item.dados[7] == 'Reprovado' %}selected{% endif %}>Reprovado</option>
-            </select>
+            <form method="POST" action="{{ url_for('atualizar_status_candidato', id=item['id']) }}">
+    <select name="status">
+        <option {% if item['status']=='Recebido' %}selected{% endif %}>Recebido</option>
+        <option {% if item['status']=='Em análise' %}selected{% endif %}>Em análise</option>
+        <option {% if item['status']=='Entrevista' %}selected{% endif %}>Entrevista</option>
+        <option {% if item['status']=='Aprovado' %}selected{% endif %}>Aprovado</option>
+        <option {% if item['status']=='Reprovado' %}selected{% endif %}>Reprovado</option>
+    </select>
+    <button type="submit">Salvar status</button>
+</form>
 
-            <button type="submit" class="btn-status">Salvar status</button>
-          </form>
-
-          <div class="score-box">
-            <div class="score-label">Compatibilidade</div>
-            <div class="score-valor">{{ item.score }}%</div>
-
-            <div class="barra-score">
-              <div class="barra-preenchida" style="width: {{ item.score or 0 }}%;"></div>
+            <div class="score-box">
+                <p><strong>{{ item['score'] or 0 }}%</strong></p>
+                <div class="barra">
+                    <div class="barra-preenchida" style="width: {{ item['score'] or 0 }}%;"></div>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <div class="score-texto">Boa compatibilidade</div>
+    <div class="info-extra">
+        <p><strong>Escolaridade:</strong> {{ item['escolaridade'] }}</p>
+        <p><strong>Cidade:</strong> {{ item['cidade'] }}</p>
+        <p><strong>Disponibilidade:</strong> {{ item['disponibilidade'] }}</p>
+        <p><strong>Experiência:</strong> {{ item['experiencia'] }}</p>
+    </div>
 
-            <div class="motivos">
-              {% for motivo in item.motivos %}
-                <div>✔ {{ motivo }}</div>
-              {% endfor %}
+</div>
+{% endfor %}
             </div>
           </div>
         </div>
