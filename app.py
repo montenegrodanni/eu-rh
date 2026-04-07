@@ -241,6 +241,22 @@ def ver_candidatos(vaga_id):
         total_candidatos=total_candidatos
     )
 
+import sqlite3
+
+conn = sqlite3.connect('banco.db')
+cursor = conn.cursor()
+
+cursor.execute("ALTER TABLE candidatos ADD COLUMN foto TEXT")
+
+conn.commit()
+conn.close()
+
+app.config['ALLOWED_EXTENSIONS'] = {'pdf', 'png', 'jpg', 'jpeg'}
+
+@app.route('/uploads/<nome_arquivo>')
+def download_curriculo(nome_arquivo):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], nome_arquivo)
+
 @app.route('/cadastro', methods=['GET'])
 def pagina_cadastro():
     return render_template('cadastro.html')

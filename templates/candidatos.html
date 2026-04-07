@@ -317,6 +317,91 @@
         min-width: 100%;
       }
     }
+
+   .top-candidato {
+    border-left: 5px solid #10b981;
+}
+
+
+.badge-top {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 4px 10px;
+    background: #10b981;
+    color: white;
+    font-size: 12px;
+    border-radius: 999px;
+    font-weight: bold;
+}
+
+.score-alto {
+    background: #10b981; /* verde */
+}
+
+.score-medio {
+    background: #f59e0b; /* amarelo */
+}
+
+.score-baixo {
+    background: #ef4444; /* vermelho */
+}
+
+.texto-alto {
+    color: #10b981;
+}
+
+.texto-medio {
+    color: #f59e0b;
+}
+
+.texto-baixo {
+    color: #ef4444;
+}
+
+.btn-curriculo {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.btn-curriculo:hover {
+    background: #1d4ed8;
+}
+
+.coluna-esquerda-candidato{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 220px; /* controla a altura */
+}
+
+.btn-curriculo{
+  margin-top: auto; /* joga o botão para baixo */
+  margin-bottom: 10px;
+}
+
+.btn-curriculo{
+  display: inline-block;
+  padding: 8px 12px;
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.btn-curriculo:hover{
+  background: #1d4ed8;
+}
+
   </style>
 </head>
 
@@ -370,20 +455,35 @@
 
     {% if candidatos %}
       {% for item in candidatos %}
-      <div class="card">
+{% set top = loop.index == 1 %}
+{% set top = loop.index == 1 and item['score'] >= 70 %}
+     <div class="card {% if top %}top-candidato{% endif %}">
+
+     
         <div class="card-topo">
           <div class="topo-esquerda">
-            <div class="foto-candidato">
-              <img src="https://via.placeholder.com/78" alt="Foto do candidato">
-            </div>
+  <div class="coluna-esquerda-candidato">
+    <div class="foto-candidato">
+      <img src="https://via.placeholder.com/78" alt="Foto do candidato">
+    </div>
 
-            <div class="card-info">
-              <h3>{{ item['nome'] }}</h3>
-              <p>📧 {{ item['email'] or 'Não informado' }}</p>
-              <p>📞 {{ item['telefone'] or 'Não informado' }}</p>
-            </div>
-          </div>
+    {% if item['arquivo_curriculo'] %}
+<a href="{{ url_for('download_curriculo', nome_arquivo=item['arquivo_curriculo']) }}"
+   target="_blank"
+   class="btn-curriculo">
+   📄 Ver currículo
+</a>
+{% else %}
+<span class="sem-curriculo">Sem currículo</span>
+{% endif %}
+  </div>
 
+  <div class="card-info">
+    <h3>{{ item['nome'] }}</h3>
+    <p>📧 {{ item['email'] or 'Não informado' }}</p>
+    <p>📞 {{ item['telefone'] or 'Não informado' }}</p>
+  </div>
+</div>
           <div class="lado-direito">
             <div class="status
               {% if item['status'] == 'Recebido' %}recebido{% endif %}
@@ -407,10 +507,22 @@
 
             <div class="score-box">
               <div class="score-label">Compatibilidade</div>
-              <div class="score-valor">{{ item['score'] }}%</div>
+              <div class="score-valor 
+    {% if item['score'] >= 80 %}texto-alto
+    {% elif item['score'] >= 50 %}texto-medio
+    {% else %}texto-baixo
+    {% endif %}
+">
+    {{ item['score'] }}%
+</div>
 
               <div class="barra-score">
-                <div class="barra-preenchida" style="width: {{ item['score'] }}%;"></div>
+                <div class="barra-preenchida 
+    {% if item['score'] >= 80 %}score-alto
+    {% elif item['score'] >= 50 %}score-medio
+    {% else %}score-baixo
+    {% endif %}
+" style="width: {{ item['score'] }}%;"></div>
               </div>
 
               <div class="score-texto">
