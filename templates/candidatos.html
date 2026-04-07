@@ -324,14 +324,14 @@
   <div class="container">
     <h2 class="titulo">Candidatos da vaga</h2>
 
-    <div class="filtros">
-      <a href="/vaga/{{ vaga[0] }}/candidatos" class="filtro">Todos</a>
-      <a href="#" class="filtro">Recebido</a>
-      <a href="#" class="filtro">Em análise</a>
-      <a href="#" class="filtro">Entrevista</a>
-      <a href="#" class="filtro">Aprovado</a>
-      <a href="#" class="filtro">Reprovado</a>
-    </div>
+    <div class="filtros-status">
+    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Todos') }}">Todos ({{ total_candidatos }})</a>
+    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Recebido') }}">Recebido ({{ contagem_status['Recebido'] }})</a>
+    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Em análise') }}">Em análise ({{ contagem_status['Em análise'] }})</a>
+    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Entrevista') }}">Entrevista ({{ contagem_status['Entrevista'] }})</a>
+    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Aprovado') }}">Aprovado ({{ contagem_status['Aprovado'] }})</a>
+    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Reprovado') }}">Reprovado ({{ contagem_status['Reprovado'] }})</a>
+</div>
 
     {% for item in candidatos %}
     <div class="card">

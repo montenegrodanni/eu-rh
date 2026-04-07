@@ -8,6 +8,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from flask import Flask
+import os
+
+app = Flask(__name__)  # 🔥 PRIMEIRO cria o app
+
+UPLOAD_FOLDER = "uploads"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER  # 🔥 DEPOIS usa o app
 
 
 app = Flask(__name__)
@@ -60,6 +69,8 @@ def enviar_email_recuperacao(destinatario, nome_empresa, link_reset):
         smtp.starttls()
         smtp.login(remetente, senha)
         smtp.send_message(msg)
+
+        
 
 def criar_banco():
     conn = sqlite3.connect(DB_PATH)
@@ -126,6 +137,41 @@ def home():
     return render_template('home.html')
 
 
+def calcular_score(candidato, vaga):
+    score = 0
+
+    # Escolaridade
+    escolaridade_pontos = {
+        "fundamental": 10,
+        "medio": 20,
+        "superior": 30,
+        "pos": 40
+    }
+    score += escolaridade_pontos.get(candidato['escolaridade'], 0)
+
+    # Experiência
+    anos = candidato['experiencia']
+    if anos >= 3:
+        score += 30
+    elif anos >= 1:
+        score += 20
+    else:
+        score += 10
+
+    # Localização
+    if candidato['cidade'] == vaga['localizacao']:
+        score += 20
+    else:
+        score += 5
+
+    # Disponibilidade
+    if candidato['disponibilidade'] == "imediata":
+        score += 10
+    else:
+        score += 5
+
+    return score
+
 @app.route('/login', methods=['GET', 'POST'])
 def pagina_login():
 
@@ -161,36 +207,70 @@ def cadastro_empresa():
 
 @app.route('/vaga/<int:vaga_id>/candidatos')
 def ver_candidatos(vaga_id):
-
     if 'empresa_id' not in session:
         return redirect(url_for('pagina_login'))
 
+    empresa_id = session['empresa_id']
+    status_filtro = request.args.get('status', 'Todos')
+
     conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    cursor.execute('SELECT * FROM vagas WHERE id = ?', (vaga_id,))
+    # buscar vaga da empresa
+    cursor.execute('SELECT * FROM vagas WHERE id = ? AND empresa_id = ?', (vaga_id, empresa_id))
     vaga = cursor.fetchone()
 
-    cursor.execute('SELECT * FROM candidatos WHERE vaga_id = ?', (vaga_id,))
-    candidatos_db = cursor.fetchall()
+    if not vaga:
+        conn.close()
+        return "Vaga não encontrada."
 
+    # contagem por status
+    cursor.execute('''
+        SELECT status, COUNT(*) as total
+        FROM candidatos
+        WHERE vaga_id = ?
+        GROUP BY status
+    ''', (vaga_id,))
+    contagem_status_db = cursor.fetchall()
+
+    contagem_status = {
+        'Recebido': 0,
+        'Em análise': 0,
+        'Entrevista': 0,
+        'Aprovado': 0,
+        'Reprovado': 0
+    }
+
+    for item in contagem_status_db:
+        contagem_status[item['status']] = item['total']
+
+    total_candidatos = sum(contagem_status.values())
+
+    # filtrar candidatos
+    if status_filtro == 'Todos':
+        cursor.execute('''
+            SELECT * FROM candidatos
+            WHERE vaga_id = ?
+            ORDER BY id DESC
+        ''', (vaga_id,))
+    else:
+        cursor.execute('''
+            SELECT * FROM candidatos
+            WHERE vaga_id = ? AND status = ?
+            ORDER BY id DESC
+        ''', (vaga_id, status_filtro))
+
+    candidatos = cursor.fetchall()
     conn.close()
-
-    candidatos = []
-
-    for candidato in candidatos_db:
-        score, motivos = calcular_score(vaga, candidato)
-
-        candidatos.append({
-            'dados': candidato,
-            'score': score,
-            'motivos': motivos
-        })
 
     return render_template(
         'candidatos.html',
         vaga=vaga,
-        candidatos=candidatos
+        candidatos=candidatos,
+        status_filtro=status_filtro,
+        contagem_status=contagem_status,
+        total_candidatos=total_candidatos
     )
 
 @app.route('/cadastro', methods=['GET'])
@@ -690,5 +770,7 @@ def redefinir_senha(token):
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port, debug=True)
