@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Candidatos - EU RH</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+    }
+
+    .navbar{
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #d9d9d9;
+    }
+
+    .navbar-inner{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 12px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
+    .logo-container{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon{
+      width: 42px;
+      height: 42px;
+      background: #d96f32;
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .logo-text{
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f2a56;
+    }
+
+    .btn-voltar{
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: #f3f4f6;
+      color: #111827;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      border: 1px solid #d1d5db;
+    }
+
+    .btn-voltar:hover{
+      background: #e5e7eb;
+    }
+
+    .container{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      box-sizing: border-box;
+    }
+
+    .titulo{
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .filtros{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .filtro{
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: white;
+      border: 1px solid #ccc;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .filtro:hover{
+      background: #eef2ff;
+    }
+
+    .card{
+      background: white;
+      padding: 28px 30px;
+      border-radius: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .card-topo{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .topo-esquerda{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 320px;
+    }
+
+    .foto-candidato img{
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e5e7eb;
+      background: #f9fafb;
+    }
+
+    .card-info h3{
+      margin: 0 0 10px 0;
+      font-size: 24px;
+      color: #111827;
+    }
+
+    .card-info p{
+      margin: 6px 0;
+      color: #4b5563;
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .lado-direito{
+      width: 300px;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-self: flex-start;
+    }
+
+    .status{
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .recebido{ background: #fef3c7; }
+    .analise{ background: #dbeafe; }
+    .entrevista{ background: #ede9fe; }
+    .aprovado{ background: #d1fae5; color: green; }
+    .reprovado{ background: #fee2e2; color: red; }
+
+    .form-status{
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .select-status{
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+      background: white;
+      box-sizing: border-box;
+    }
+
+    .btn-status{
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background: rgb(50, 50, 158);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .btn-status:hover{
+      opacity: 0.95;
+    }
+
+    .score-box{
+      margin-top: 4px;
+      padding-top: 12px;
+      border-top: 1px solid #e5e7eb;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+    }
+
+    .score-label{
+      font-size: 12px;
+      font-weight: bold;
+      color: #6b7280;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .score-valor{
+      font-size: 18px;
+      font-weight: bold;
+      color: rgb(50, 50, 158);
+      margin-bottom: 6px;
+    }
+
+    .barra-score{
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 6px 0 10px 0;
+    }
+
+    .barra-preenchida{
+      height: 100%;
+      border-radius: 999px;
+      background: #2563eb;
+    }
+
+    .score-texto{
+      font-size: 13px;
+      font-weight: bold;
+      color: #1d4ed8;
+      margin-bottom: 8px;
+    }
+
+    .motivos{
+      font-size: 12px;
+      color: #374151;
+    }
+
+    .motivos div{
+      margin-bottom: 4px;
+    }
+
+    .detalhes{
+      border-top: 1px solid #e5e7eb;
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .detalhes-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 40px;
+      margin-top: 8px;
+    }
+
+    .detalhes-grid p{
+      margin: 4px 0;
+      color: #4b5563;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px){
+      .card-topo{
+        flex-direction: column;
+      }
+
+      .lado-direito{
+        width: 100%;
+        min-width: 100%;
+      }
+
+      .form-status{
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    @media (max-width: 768px){
+      .detalhes-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .topo-esquerda{
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="logo-container">
+        <div class="logo-icon">EU</div>
+        <div class="logo-text">EU RH</div>
+      </div>
+
+      <a href="/dashboard" class="btn-voltar">Voltar</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2 class="titulo">Candidatos da vaga</h2>
+
+    <div class="filtros">
+      <a href="/vaga/{{ vaga[0] }}/candidatos" class="filtro">Todos</a>
+      <a href="#" class="filtro">Recebido</a>
+      <a href="#" class="filtro">Em análise</a>
+      <a href="#" class="filtro">Entrevista</a>
+      <a href="#" class="filtro">Aprovado</a>
+      <a href="#" class="filtro">Reprovado</a>
+    </div>
+
+    {% for item in candidatos %}
+    <div class="card">
+
+      <div class="card-topo">
+
+        <div class="topo-esquerda">
+          <div class="foto-candidato">
+            <img src="https://via.placeholder.com/80" alt="Foto do candidato">
+          </div>
+
+          <div class="card-info">
+            <h3>{{ item.dados[2] }}</h3>
+            <p>📧 {{ item.dados[3] }}</p>
+            <p>📞 {{ item.dados[4] }}</p>
+          </div>
+        </div>
+
+        <div class="lado-direito">
+          <span class="status
+            {% if item.dados[7] == 'Recebido' %}recebido{% endif %}
+            {% if item.dados[7] == 'Em análise' %}analise{% endif %}
+            {% if item.dados[7] == 'Entrevista' %}entrevista{% endif %}
+            {% if item.dados[7] == 'Aprovado' %}aprovado{% endif %}
+            {% if item.dados[7] == 'Reprovado' %}reprovado{% endif %}
+          ">
+            {{ item.dados[7] or 'Recebido' }}
+          </span>
+
+          <form method="POST" action="{{ url_for('atualizar_status_candidato', id=item.dados[0]) }}" class="form-status">
+            <select name="status" class="select-status">
+              <option value="Recebido" {% if item.dados[7] == 'Recebido' %}selected{% endif %}>Recebido</option>
+              <option value="Em análise" {% if item.dados[7] == 'Em análise' %}selected{% endif %}>Em análise</option>
+              <option value="Entrevista" {% if item.dados[7] == 'Entrevista' %}selected{% endif %}>Entrevista</option>
+              <option value="Aprovado" {% if item.dados[7] == 'Aprovado' %}selected{% endif %}>Aprovado</option>
+              <option value="Reprovado" {% if item.dados[7] == 'Reprovado' %}selected{% endif %}>Reprovado</option>
+            </select>
+
+            <button type="submit" class="btn-status">Salvar status</button>
+          </form>
+
+          <div class="score-box">
+            <div class="score-label">Compatibilidade</div>
+            <div class="score-valor">{{ item.score }}%</div>
+
+            <div class="barra-score">
+              <div class="barra-preenchida" style="width: {{ item.score or 0 }}%;"></div>
+            </div>
+
+            <div class="score-texto">Boa compatibilidade</div>
+
+            <div class="motivos">
+              {% for motivo in item.motivos %}
+                <div>✔ {{ motivo }}</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="detalhes">
+        <div class="detalhes-grid">
+          <p><strong>Nacionalidade:</strong> {{ item.dados[8] or 'Não informado' }}</p>
+          <p><strong>Escolaridade:</strong> {{ item.dados[9] or 'Não informado' }}</p>
+          <p><strong>Idioma(s):</strong> {{ item.dados[10] or 'Não informado' }}</p>
+          <p><strong>Cidade:</strong> {{ item.dados[11] or 'Não informado' }}</p>
+          <p><strong>Estado:</strong> {{ item.dados[12] or 'Não informado' }}</p>
+          <p><strong>LinkedIn:</strong> {{ item.dados[13] or 'Não informado' }}</p>
+          <p><strong>Pretensão salarial:</strong> {{ item.dados[14] or 'Não informado' }}</p>
+          <p><strong>Disponibilidade:</strong> {{ item.dados[15] or 'Não informado' }}</p>
+          <p><strong>Experiência:</strong> {{ item.dados[16] or 'Não informado' }}</p>
+        </div>
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sucesso - EU RH</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
+
+    header{
+      background-color: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 18px 50px;
+    }
+
+    .topo{
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .logo-box{
+      background-color: rgb(206, 98, 47);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container{
+      max-width: 900px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .box{
+      background-color: white;
+      border-radius: 20px;
+      padding: 50px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .icone{
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .sucesso{
+      color: green;
+    }
+
+    h1{
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    p{
+      font-size: 18px;
+      color: #6b7280;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .botoes{
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      padding: 14px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn-principal{
+      background-color: rgb(50, 50, 158);
+      color: white;
+    }
+
+    .btn-principal:hover{
+      background-color: rgb(40, 40, 130);
+    }
+
+    .btn-secundario{
+      background-color: rgb(206, 98, 47);
+      color: white;
+    }
+
+    .btn-secundario:hover{
+      background-color: rgb(180, 85, 40);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="topo">
+    <div class="logo">
+      <div class="logo-box">EU</div>
+      <span>EU RH</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="box">
+
+    <div class="icone sucesso">✔</div>
+
+    <h1>Candidatura enviada com sucesso!</h1>
+
+    <p>
+      Seus dados foram enviados para a empresa responsável pela vaga.
+      Em breve você poderá ser contatado.
+    </p>
+
+    <div class="botoes">
+      <a href="/" class="btn btn-principal">Voltar ao início</a>
+      <a href="/vaga/{{ vaga_id }}" class="btn btn-secundario">Ver vaga novamente</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

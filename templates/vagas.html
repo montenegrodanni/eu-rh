@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagas Abertas - EU RH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #0f172a;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 28px;
+            color: #111827;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            background: linear-gradient(135deg, #e98c43, #d86b2b);
+            color: white;
+            font-weight: bold;
+            border-radius: 12px;
+            padding: 8px 10px;
+            font-size: 22px;
+            box-shadow: 0 4px 10px rgba(216, 107, 43, 0.25);
+        }
+
+        .nav-links a {
+            margin-left: 26px;
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #3538b8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #3538b8, #7aa6d1);
+            color: white;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 760px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px 70px;
+        }
+
+        .topo-lista {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .topo-lista h2 {
+            font-size: 34px;
+        }
+
+        .contador {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 12px 18px;
+            border-radius: 14px;
+            color: #475569;
+            font-weight: bold;
+        }
+
+        .grid-vagas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card-vaga {
+            background: white;
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .empresa {
+            display: inline-block;
+            background: #eef2ff;
+            color: #3538b8;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .card-vaga h3 {
+            font-size: 28px;
+            margin-bottom: 14px;
+            color: #111827;
+        }
+
+        .descricao {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .infos {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .info-item {
+            color: #334155;
+            font-size: 15px;
+        }
+
+        .acoes {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-principal,
+        .btn-secundario {
+            text-decoration: none;
+            padding: 13px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .btn-principal {
+            background: #3538b8;
+            color: white;
+        }
+
+        .btn-secundario {
+            background: #f8fafc;
+            color: #3538b8;
+            border: 1px solid #cbd5e1;
+        }
+
+        .vazio {
+            background: white;
+            border: 1px dashed #cbd5e1;
+            padding: 40px;
+            border-radius: 22px;
+            text-align: center;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">
+            <span class="logo-badge">EU</span>
+            <span>EU RH</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="{{ url_for('home') }}">Início</a>
+            <a href="{{ url_for('listar_vagas') }}">Vagas</a>
+            <a href="{{ url_for('pagina_login') }}">Entrar</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Encontre sua próxima oportunidade</h1>
+        <p>Explore vagas abertas em diferentes empresas e candidate-se de forma simples, rápida e profissional.</p>
+    </section>
+
+    <main class="container">
+        <div class="topo-lista">
+            <h2>Vagas disponíveis</h2>
+            <div class="contador">{{ vagas|length }} vaga(s) encontrada(s)</div>
+        </div>
+
+        {% if vagas %}
+            <div class="grid-vagas">
+                {% for vaga in vagas %}
+                    <div class="card-vaga">
+                        <div class="empresa">{{ vaga[7] }}</div>
+
+                        <h3>{{ vaga[1] }}</h3>
+
+                        <p class="descricao">
+                            {{ vaga[2][:140] }}{% if vaga[2]|length > 140 %}...{% endif %}
+                        </p>
+
+                        <div class="infos">
+                            <div class="info-item"><strong>Setor:</strong> {{ vaga[3] }}</div>
+                            <div class="info-item"><strong>Salário:</strong> R$ {{ vaga[4] }}</div>
+                            <div class="info-item"><strong>Contrato:</strong> {{ vaga[5] }}</div>
+                            <div class="info-item"><strong>Localização:</strong> {{ vaga[6] }}</div>
+                        </div>
+
+                        <div class="acoes">
+                            <a href="{{ url_for('ver_vaga_publica', id=vaga[0]) }}" class="btn-principal">Ver vaga</a>
+                            <a href="{{ url_for('candidatar', id=vaga[0]) }}" class="btn-secundario">Candidatar-se</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="vazio">
+                Ainda não há vagas publicadas no momento.
+            </div>
+        {% endif %}
+    </main>
+
+</body>
+</html>

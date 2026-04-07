@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Vaga - EU RH</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
+
+    header{
+      background-color: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 18px 50px;
+    }
+
+    .topo{
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .logo-box{
+      background-color: rgb(206, 98, 47);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav ul{
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a{
+      text-decoration: none;
+      color: #5b6475;
+      font-weight: 500;
+    }
+
+    nav a:hover{
+      color: rgb(50, 50, 158);
+    }
+
+    .hero{
+      background: linear-gradient(90deg, rgb(50, 50, 158), rgb(113, 158, 196));
+      color: white;
+      padding: 50px;
+      border-radius: 20px;
+      margin-bottom: 35px;
+    }
+
+    .hero h1{
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p{
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .container{
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px 80px;
+    }
+
+    .form-box{
+      background-color: white;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .form-box h2{
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .form-box p{
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    .grupo{
+      margin-bottom: 18px;
+    }
+
+    .grupo label{
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #374151;
+    }
+
+    .grupo input,
+    .grupo textarea,
+    .grupo select{
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .grupo textarea{
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .grupo input:focus,
+    .grupo textarea:focus,
+    .grupo select:focus{
+      border-color: rgb(50, 50, 158);
+      box-shadow: 0 0 0 3px rgba(50, 50, 158, 0.12);
+    }
+
+    .duas-colunas{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .btn-salvar{
+      width: 100%;
+      border: none;
+      background-color: rgb(50, 50, 158);
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn-salvar:hover{
+      background-color: rgb(40, 40, 130);
+    }
+
+    @media (max-width: 768px){
+      header{
+        padding: 18px 20px;
+      }
+
+      .topo{
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      nav ul{
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero{
+        padding: 30px;
+      }
+
+      .hero h1{
+        font-size: 28px;
+      }
+
+      .duas-colunas{
+        grid-template-columns: 1fr;
+      }
+
+      .form-box{
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="topo">
+    <div class="logo">
+      <div class="logo-box">EU</div>
+      <span>EU RH</span>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="/">Início</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/login">Sair</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>Criar nova vaga</h1>
+    <p>Preencha os dados abaixo para publicar uma nova oportunidade para sua empresa.</p>
+  </div>
+
+  <div class="form-box">
+    <h2>Dados da vaga</h2>
+    <p>Informe os detalhes da oportunidade para atrair os candidatos certos.</p>
+
+    <form action="/criar-vaga" method="post">
+      <div class="grupo">
+        <label for="titulo">Título da vaga</label>
+        <input type="text" id="titulo" name="titulo" placeholder="Ex.: Analista Administrativo" required>
+      </div>
+
+      <div class="grupo">
+        <label for="descricao">Descrição da vaga</label>
+        <textarea id="descricao" name="descricao" placeholder="Descreva as atividades da vaga" required></textarea>
+      </div>
+
+      <div class="duas-colunas">
+        <div class="grupo">
+          <label for="setor">Setor</label>
+          <input type="text" id="setor" name="setor" placeholder="Ex.: Financeiro" required>
+        </div>
+
+        <div class="grupo">
+          <label for="salario">Salário</label>
+          <input type="number" id="salario" name="salario" placeholder="Ex.: 2500" required>
+        </div>
+      </div>
+
+      <div class="duas-colunas">
+        <div class="grupo">
+          <label for="tipo_contrato">Tipo de contrato</label>
+          <select id="tipo_contrato" name="tipo_contrato" required>
+            <option value="">Selecione</option>
+            <option>CLT</option>
+            <option>PJ</option>
+            <option>Estágio</option>
+            <option>Temporário</option>
+          </select>
+        </div>
+
+        <div class="grupo">
+          <label for="localizacao">Localização</label>
+          <input type="text" id="localizacao" name="localizacao" placeholder="Ex.: Porto Alegre - RS" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-salvar">Publicar vaga</button>
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro da Empresa - EU RH</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
+
+    header{
+      background-color: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 18px 50px;
+    }
+
+    .topo{
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #1f2937;
+    }
+
+    .logo-box{
+      background-color: rgb(206, 98, 47);
+      color: white;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    nav ul{
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a{
+      text-decoration: none;
+      color: #5b6475;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    nav a:hover{
+      color: rgb(50, 50, 158);
+    }
+
+    .hero-cadastro{
+      background: linear-gradient(90deg, rgb(50, 50, 158), rgb(113, 158, 196));
+      min-height: calc(100vh - 89px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+    }
+
+    .cadastro-wrapper{
+      width: 100%;
+      max-width: 1150px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .texto-cadastro{
+      color: white;
+    }
+
+    .texto-cadastro h1{
+      font-size: 50px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .texto-cadastro p{
+      font-size: 21px;
+      line-height: 1.5;
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+
+    .texto-cadastro a{
+      display: inline-block;
+      background-color: white;
+      color: rgb(50, 50, 158);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .texto-cadastro a:hover{
+      background-color: #eef2ff;
+    }
+
+    .cadastro-box{
+      background-color: white;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    .cadastro-box h2{
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .cadastro-box .subtexto{
+      color: #6b7280;
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+
+    .grupo{
+      margin-bottom: 18px;
+    }
+
+    .grupo label{
+      display: block;
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+
+    .grupo input{
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .grupo input:focus{
+      border-color: rgb(50, 50, 158);
+      box-shadow: 0 0 0 3px rgba(50, 50, 158, 0.12);
+    }
+
+    .btn-cadastrar{
+      width: 100%;
+      border: none;
+      background-color: rgb(206, 98, 47);
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-bottom: 18px;
+    }
+
+    .btn-cadastrar:hover{
+      background-color: rgb(180, 85, 40);
+    }
+
+    .login-link{
+      text-align: center;
+      color: #4b5563;
+      font-size: 15px;
+    }
+
+    .login-link a{
+      color: rgb(50, 50, 158);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 992px){
+      .cadastro-wrapper{
+        grid-template-columns: 1fr;
+      }
+
+      .texto-cadastro{
+        text-align: center;
+      }
+
+      .texto-cadastro p{
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .texto-cadastro h1{
+        font-size: 38px;
+      }
+
+      .texto-cadastro p{
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 768px){
+      header{
+        padding: 18px 20px;
+      }
+
+      .topo{
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      nav ul{
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .texto-cadastro h1{
+        font-size: 30px;
+      }
+
+      .cadastro-box{
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="topo">
+      <div class="logo">
+        <div class="logo-box">EU</div>
+        <span>EU RH</span>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="/">Início</a></li>
+          <li><a href="#">Vagas</a></li>
+          <li><a href="#">Para Empresas</a></li>
+          <li><a href="/login">Entrar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-cadastro">
+    <div class="cadastro-wrapper">
+
+      <div class="texto-cadastro">
+        <h1>Crie a conta da sua empresa</h1>
+        <p>
+          Cadastre sua empresa no EU RH e comece a publicar vagas,
+          receber candidatos direcionados e organizar seu recrutamento
+          em uma só plataforma.
+        </p>
+        <a href="/">Voltar para a página inicial</a>
+      </div>
+
+      <div class="cadastro-box">
+        <h2>Cadastro da Empresa</h2>
+        <p class="subtexto">Preencha os dados abaixo para começar.</p>
+
+        <form action="/cadastro" method="post">
+          <div class="grupo">
+            <label for="empresa">Nome da empresa</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Digite o nome da empresa" required>
+          </div>
+
+          <div class="grupo">
+            <label for="email">Email corporativo</label>
+            <input type="email" id="email" name="email" placeholder="Digite o email corporativo" required>
+          </div>
+
+          <div class="grupo">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Crie uma senha" required>
+          </div>
+
+          <div class="grupo">
+            <label for="confirmar_senha">Confirmar senha</label>
+            <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme a senha" required>
+          </div>
+
+          <button type="submit" class="btn-cadastrar">Cadastrar empresa</button>
+        </form>
+
+        <p class="login-link">
+          Já tem conta? <a href="/login">Entrar agora</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Vaga - EU RH</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
+
+    header{
+      background-color: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 18px 50px;
+    }
+
+    .topo{
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .logo-box{
+      background-color: rgb(206, 98, 47);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav ul{
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a{
+      text-decoration: none;
+      color: #5b6475;
+      font-weight: 500;
+    }
+
+    nav a:hover{
+      color: rgb(50, 50, 158);
+    }
+
+    .hero{
+      background: linear-gradient(90deg, rgb(50, 50, 158), rgb(113, 158, 196));
+      color: white;
+      padding: 50px;
+      border-radius: 20px;
+      margin-bottom: 35px;
+    }
+
+    .hero h1{
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p{
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .container{
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px 80px;
+    }
+
+    .form-box{
+      background-color: white;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .form-box h2{
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .form-box p{
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    .grupo{
+      margin-bottom: 18px;
+    }
+
+    .grupo label{
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #374151;
+    }
+
+    .grupo input,
+    .grupo textarea,
+    .grupo select{
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .grupo textarea{
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .grupo input:focus,
+    .grupo textarea:focus,
+    .grupo select:focus{
+      border-color: rgb(50, 50, 158);
+      box-shadow: 0 0 0 3px rgba(50, 50, 158, 0.12);
+    }
+
+    .duas-colunas{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .acoes{
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn-salvar{
+      flex: 1;
+      border: none;
+      background-color: rgb(50, 50, 158);
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-salvar:hover{
+      background-color: rgb(40, 40, 130);
+    }
+
+    .btn-voltar{
+      flex: 1;
+      text-align: center;
+      background-color: rgb(206, 98, 47);
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .btn-voltar:hover{
+      background-color: rgb(180, 85, 40);
+    }
+
+    @media (max-width: 768px){
+      header{
+        padding: 18px 20px;
+      }
+
+      .topo{
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      nav ul{
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero{
+        padding: 30px;
+      }
+
+      .hero h1{
+        font-size: 28px;
+      }
+
+      .duas-colunas{
+        grid-template-columns: 1fr;
+      }
+
+      .acoes{
+        flex-direction: column;
+      }
+
+      .form-box{
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="topo">
+    <div class="logo">
+      <div class="logo-box">EU</div>
+      <span>EU RH</span>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="/">Início</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/login">Sair</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>Editar vaga</h1>
+    <p>Atualize as informações da vaga da sua empresa.</p>
+  </div>
+
+  <div class="form-box">
+    <h2>Dados da vaga</h2>
+    <p>Edite os campos abaixo e salve as alterações.</p>
+
+    <form action="/editar-vaga/{{ vaga[0] }}" method="post">
+      <div class="grupo">
+        <label for="titulo">Título da vaga</label>
+        <input type="text" id="titulo" name="titulo" value="{{ vaga[1] }}" required>
+      </div>
+
+      <div class="grupo">
+        <label for="descricao">Descrição da vaga</label>
+        <textarea id="descricao" name="descricao" required>{{ vaga[2] }}</textarea>
+      </div>
+
+      <div class="duas-colunas">
+        <div class="grupo">
+          <label for="setor">Setor</label>
+          <input type="text" id="setor" name="setor" value="{{ vaga[3] }}" required>
+        </div>
+
+        <div class="grupo">
+          <label for="salario">Salário</label>
+          <input type="number" id="salario" name="salario" value="{{ vaga[4] }}" required>
+        </div>
+      </div>
+
+      <div class="duas-colunas">
+        <div class="grupo">
+          <label for="tipo_contrato">Tipo de contrato</label>
+          <select id="tipo_contrato" name="tipo_contrato" required>
+            <option value="">Selecione</option>
+            <option value="CLT" {% if vaga[5] == 'CLT' %}selected{% endif %}>CLT</option>
+            <option value="PJ" {% if vaga[5] == 'PJ' %}selected{% endif %}>PJ</option>
+            <option value="Estágio" {% if vaga[5] == 'Estágio' %}selected{% endif %}>Estágio</option>
+            <option value="Temporário" {% if vaga[5] == 'Temporário' %}selected{% endif %}>Temporário</option>
+          </select>
+        </div>
+
+        <div class="grupo">
+          <label for="localizacao">Localização</label>
+          <input type="text" id="localizacao" name="localizacao" value="{{ vaga[6] }}" required>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button type="submit" class="btn-salvar">Salvar alterações</button>
+        <a href="/dashboard" class="btn-voltar">Cancelar</a>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>

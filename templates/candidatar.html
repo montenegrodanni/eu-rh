@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Candidatar-se - EU RH</title>
+
+<style>
+body{
+  font-family: Arial;
+  background: #f3f4f6;
+  margin: 0;
+}
+
+header{
+  background: white;
+  padding: 20px 40px;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo{
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.container{
+  max-width: 700px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+.card{
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.titulo{
+  margin-bottom: 5px;
+}
+
+.subtitulo{
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.grupo{
+  margin-bottom: 15px;
+}
+
+.duas-colunas{
+  display: flex;
+  gap: 10px;
+}
+
+.duas-colunas .grupo{
+  flex: 1;
+}
+
+label{
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, textarea{
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+textarea{
+  height: 80px;
+}
+
+.btn-enviar{
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgb(50, 50, 158);
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.voltar{
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  color: orange;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">EU RH</div>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2 class="titulo">Seus dados</h2>
+    <p class="subtitulo">Informe seus dados e envie sua candidatura.</p>
+
+    <form method="post" enctype="multipart/form-data">
+
+      <!-- DADOS PRINCIPAIS -->
+      <div class="grupo">
+        <label>Nome completo</label>
+        <input type="text" name="nome" placeholder="Digite seu nome completo" required>
+      </div>
+
+      <div class="duas-colunas">
+        <div class="grupo">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Digite seu email" required>
+        </div>
+
+        <div class="grupo">
+          <label>Telefone</label>
+          <input type="text" name="telefone" placeholder="Digite seu telefone">
+        </div>
+      </div>
+
+      <!-- NOVOS CAMPOS -->
+      <div class="duas-colunas">
+        <div class="grupo">
+          <label>Nacionalidade</label>
+          <input type="text" name="nacionalidade" placeholder="Ex: Brasileira">
+        </div>
+
+        <div class="grupo">
+          <label>Escolaridade</label>
+          <input type="text" name="escolaridade" placeholder="Ex: Ensino superior completo">
+        </div>
+      </div>
+
+      <div class="duas-colunas">
+        <div class="grupo">
+          <label>Idioma(s)</label>
+          <input type="text" name="idioma" placeholder="Ex: Português, Inglês intermediário">
+        </div>
+
+        <div class="grupo">
+          <label>Pretensão salarial</label>
+          <input type="text" name="pretensao_salarial" placeholder="Ex: R$ 3.000,00">
+        </div>
+      </div>
+
+      <div class="duas-colunas">
+        <div class="grupo">
+          <label>Cidade</label>
+          <input type="text" name="cidade" placeholder="Ex: Porto Alegre">
+        </div>
+
+        <div class="grupo">
+          <label>Estado</label>
+          <input type="text" name="estado" placeholder="Ex: RS">
+        </div>
+      </div>
+
+      <div class="grupo">
+        <label>LinkedIn</label>
+        <input type="text" name="linkedin" placeholder="Cole o link do seu perfil">
+      </div>
+
+      <div class="grupo">
+        <label>Disponibilidade</label>
+        <input type="text" name="disponibilidade" placeholder="Ex: Imediata">
+      </div>
+
+      <div class="grupo">
+        <label>Experiência profissional</label>
+        <textarea name="experiencia" placeholder="Descreva sua experiência profissional"></textarea>
+      </div>
+
+      <!-- CURRICULO -->
+      <div class="grupo">
+        <label>Currículo em PDF</label>
+        <input type="file" name="arquivo_curriculo" accept=".pdf">
+      </div>
+
+      <!-- BOTÃO -->
+      <button type="submit" class="btn-enviar">Enviar candidatura</button>
+
+    </form>
+
+    <a href="/vaga/{{ vaga_id }}" class="voltar">Voltar para a vaga</a>
+
+  </div>
+
+</div>
+
+</body>
+</html>

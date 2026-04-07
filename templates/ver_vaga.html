@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Vaga</title>
+</head>
+<body>
+
+    <h1>{{ vaga[1] }}</h1>
+
+    <p><strong>Descrição:</strong> {{ vaga[2] }}</p>
+    <p><strong>Setor:</strong> {{ vaga[3] }}</p>
+    <p><strong>Salário:</strong> R$ {{ vaga[4] }}</p>
+    <p><strong>Tipo:</strong> {{ vaga[5] }}</p>
+    <p><strong>Localização:</strong> {{ vaga[6] }}</p>
+
+    <br>
+
+    <a href="{{ url_for('dashboard') }}">⬅ Voltar</a>
+
+</body>
+</html>
