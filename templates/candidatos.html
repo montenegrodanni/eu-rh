@@ -464,7 +464,11 @@
           <div class="topo-esquerda">
   <div class="coluna-esquerda-candidato">
     <div class="foto-candidato">
-      <img src="https://via.placeholder.com/78" alt="Foto do candidato">
+      {% if item['foto'] %}
+<img src="{{ url_for('download_curriculo', nome_arquivo=item['foto']) }}">
+{% else %}
+<img src="https://via.placeholder.com/78">
+{% endif %}
     </div>
 
     {% if item['arquivo_curriculo'] %}

@@ -111,7 +111,7 @@ textarea{
     <h2 class="titulo">Seus dados</h2>
     <p class="subtitulo">Informe seus dados e envie sua candidatura.</p>
 
-    <form method="post" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data">
 
       <!-- DADOS PRINCIPAIS -->
       <div class="grupo">
@@ -188,6 +188,7 @@ textarea{
         <label>Currículo em PDF</label>
         <input type="file" name="arquivo_curriculo" accept=".pdf">
       </div>
+      <input type="file" name="foto" accept="image/*">
 
       <!-- BOTÃO -->
       <button type="submit" class="btn-enviar">Enviar candidatura</button>
