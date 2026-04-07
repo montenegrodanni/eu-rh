@@ -79,14 +79,14 @@
       font-size: 20px;
     }
 
-    .filtros{
+    .filtros-status{
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
       margin-bottom: 25px;
     }
 
-    .filtro{
+    .filtros-status a{
       padding: 8px 14px;
       border-radius: 8px;
       background: white;
@@ -97,8 +97,14 @@
       font-size: 14px;
     }
 
-    .filtro:hover{
+    .filtros-status a:hover{
       background: #eef2ff;
+    }
+
+    .filtros-status a.ativo{
+      background: #32329e;
+      color: white;
+      border-color: #32329e;
     }
 
     .card{
@@ -167,11 +173,11 @@
       text-align: left;
     }
 
-    .recebido{ background: #fef3c7; }
-    .analise{ background: #dbeafe; }
-    .entrevista{ background: #ede9fe; }
-    .aprovado{ background: #d1fae5; color: green; }
-    .reprovado{ background: #fee2e2; color: red; }
+    .recebido{ background: #fef3c7; color: #92400e; }
+    .analise{ background: #dbeafe; color: #1d4ed8; }
+    .entrevista{ background: #ede9fe; color: #6d28d9; }
+    .aprovado{ background: #d1fae5; color: #047857; }
+    .reprovado{ background: #fee2e2; color: #b91c1c; }
 
     .form-status{
       display: flex;
@@ -209,9 +215,6 @@
       margin-top: 4px;
       padding-top: 12px;
       border-top: 1px solid #e5e7eb;
-      background: transparent;
-      border: none;
-      border-radius: 0;
     }
 
     .score-label{
@@ -280,6 +283,15 @@
       font-size: 14px;
     }
 
+    .sem-candidatos{
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      color: #6b7280;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
     @media (max-width: 900px){
       .card-topo{
         flex-direction: column;
@@ -325,87 +337,121 @@
     <h2 class="titulo">Candidatos da vaga</h2>
 
     <div class="filtros-status">
-    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Todos') }}">Todos ({{ total_candidatos }})</a>
-    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Recebido') }}">Recebido ({{ contagem_status['Recebido'] }})</a>
-    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Em análise') }}">Em análise ({{ contagem_status['Em análise'] }})</a>
-    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Entrevista') }}">Entrevista ({{ contagem_status['Entrevista'] }})</a>
-    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Aprovado') }}">Aprovado ({{ contagem_status['Aprovado'] }})</a>
-    <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Reprovado') }}">Reprovado ({{ contagem_status['Reprovado'] }})</a>
-</div>
+      <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Todos') }}"
+         class="{% if status_filtro == 'Todos' %}ativo{% endif %}">
+         Todos ({{ total_candidatos }})
+      </a>
 
-    {% for item in candidatos %}
-<div class="card-candidato">
+      <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Recebido') }}"
+         class="{% if status_filtro == 'Recebido' %}ativo{% endif %}">
+         Recebido ({{ contagem_status['Recebido'] }})
+      </a>
 
-    <div class="topo-card">
-        <div class="card-info">
-            <h3>{{ item['nome'] }}</h3>
-            <p>📧 {{ item['email'] }}</p>
-            <p>📞 {{ item['telefone'] }}</p>
-        </div>
+      <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Em análise') }}"
+         class="{% if status_filtro == 'Em análise' %}ativo{% endif %}">
+         Em análise ({{ contagem_status['Em análise'] }})
+      </a>
 
-        <div class="status-box">
-            <span class="status-tag 
-                {% if item['status'] == 'Recebido' %}status-recebido{% endif %}
-                {% if item['status'] == 'Em análise' %}status-analise{% endif %}
-                {% if item['status'] == 'Entrevista' %}status-entrevista{% endif %}
-                {% if item['status'] == 'Aprovado' %}status-aprovado{% endif %}
-                {% if item['status'] == 'Reprovado' %}status-reprovado{% endif %}
-            ">
-                {{ item['status'] }}
-            </span>
+      <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Entrevista') }}"
+         class="{% if status_filtro == 'Entrevista' %}ativo{% endif %}">
+         Entrevista ({{ contagem_status['Entrevista'] }})
+      </a>
 
-            <form method="POST" action="{{ url_for('atualizar_status_candidato', id=item['id']) }}">
-    <select name="status">
-        <option {% if item['status']=='Recebido' %}selected{% endif %}>Recebido</option>
-        <option {% if item['status']=='Em análise' %}selected{% endif %}>Em análise</option>
-        <option {% if item['status']=='Entrevista' %}selected{% endif %}>Entrevista</option>
-        <option {% if item['status']=='Aprovado' %}selected{% endif %}>Aprovado</option>
-        <option {% if item['status']=='Reprovado' %}selected{% endif %}>Reprovado</option>
-    </select>
-    <button type="submit">Salvar status</button>
-</form>
+      <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Aprovado') }}"
+         class="{% if status_filtro == 'Aprovado' %}ativo{% endif %}">
+         Aprovado ({{ contagem_status['Aprovado'] }})
+      </a>
+
+      <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Reprovado') }}"
+         class="{% if status_filtro == 'Reprovado' %}ativo{% endif %}">
+         Reprovado ({{ contagem_status['Reprovado'] }})
+      </a>
+    </div>
+
+    {% if candidatos %}
+      {% for item in candidatos %}
+      <div class="card">
+        <div class="card-topo">
+          <div class="topo-esquerda">
+            <div class="foto-candidato">
+              <img src="https://via.placeholder.com/78" alt="Foto do candidato">
+            </div>
+
+            <div class="card-info">
+              <h3>{{ item['nome'] }}</h3>
+              <p>📧 {{ item['email'] or 'Não informado' }}</p>
+              <p>📞 {{ item['telefone'] or 'Não informado' }}</p>
+            </div>
+          </div>
+
+          <div class="lado-direito">
+            <div class="status
+              {% if item['status'] == 'Recebido' %}recebido{% endif %}
+              {% if item['status'] == 'Em análise' %}analise{% endif %}
+              {% if item['status'] == 'Entrevista' %}entrevista{% endif %}
+              {% if item['status'] == 'Aprovado' %}aprovado{% endif %}
+              {% if item['status'] == 'Reprovado' %}reprovado{% endif %}">
+              {{ item['status'] }}
+            </div>
+
+            <form method="POST" action="{{ url_for('atualizar_status_candidato', id=item['id']) }}" class="form-status">
+              <select name="status" class="select-status">
+                <option value="Recebido" {% if item['status'] == 'Recebido' %}selected{% endif %}>Recebido</option>
+                <option value="Em análise" {% if item['status'] == 'Em análise' %}selected{% endif %}>Em análise</option>
+                <option value="Entrevista" {% if item['status'] == 'Entrevista' %}selected{% endif %}>Entrevista</option>
+                <option value="Aprovado" {% if item['status'] == 'Aprovado' %}selected{% endif %}>Aprovado</option>
+                <option value="Reprovado" {% if item['status'] == 'Reprovado' %}selected{% endif %}>Reprovado</option>
+              </select>
+              <button type="submit" class="btn-status">Salvar status</button>
+            </form>
 
             <div class="score-box">
-                <p><strong>{{ item['score'] or 0 }}%</strong></p>
-                <div class="barra">
-                    <div class="barra-preenchida" style="width: {{ item['score'] or 0 }}%;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+              <div class="score-label">Compatibilidade</div>
+              <div class="score-valor">{{ item['score'] }}%</div>
 
-    <div class="info-extra">
-        <p><strong>Escolaridade:</strong> {{ item['escolaridade'] }}</p>
-        <p><strong>Cidade:</strong> {{ item['cidade'] }}</p>
-        <p><strong>Disponibilidade:</strong> {{ item['disponibilidade'] }}</p>
-        <p><strong>Experiência:</strong> {{ item['experiencia'] }}</p>
-    </div>
+              <div class="barra-score">
+                <div class="barra-preenchida" style="width: {{ item['score'] }}%;"></div>
+              </div>
 
-</div>
-{% endfor %}
+              <div class="score-texto">
+                {% if item['score'] >= 80 %}
+                  Alta compatibilidade
+                {% elif item['score'] >= 50 %}
+                  Boa compatibilidade
+                {% else %}
+                  Compatibilidade moderada
+                {% endif %}
+              </div>
+
+              <div class="motivos">
+                {% for motivo in item['motivos'] %}
+                  <div>✓ {{ motivo }}</div>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
 
-      </div>
-
-      <div class="detalhes">
-        <div class="detalhes-grid">
-          <p><strong>Nacionalidade:</strong> {{ item.dados[8] or 'Não informado' }}</p>
-          <p><strong>Escolaridade:</strong> {{ item.dados[9] or 'Não informado' }}</p>
-          <p><strong>Idioma(s):</strong> {{ item.dados[10] or 'Não informado' }}</p>
-          <p><strong>Cidade:</strong> {{ item.dados[11] or 'Não informado' }}</p>
-          <p><strong>Estado:</strong> {{ item.dados[12] or 'Não informado' }}</p>
-          <p><strong>LinkedIn:</strong> {{ item.dados[13] or 'Não informado' }}</p>
-          <p><strong>Pretensão salarial:</strong> {{ item.dados[14] or 'Não informado' }}</p>
-          <p><strong>Disponibilidade:</strong> {{ item.dados[15] or 'Não informado' }}</p>
-          <p><strong>Experiência:</strong> {{ item.dados[16] or 'Não informado' }}</p>
+        <div class="detalhes">
+          <div class="detalhes-grid">
+            <p><strong>Nacionalidade:</strong> {{ item['nacionalidade'] or 'Não informado' }}</p>
+            <p><strong>Escolaridade:</strong> {{ item['escolaridade'] or 'Não informado' }}</p>
+            <p><strong>Idioma(s):</strong> {{ item['idioma'] or 'Não informado' }}</p>
+            <p><strong>Cidade:</strong> {{ item['cidade'] or 'Não informado' }}</p>
+            <p><strong>Estado:</strong> {{ item['estado'] or 'Não informado' }}</p>
+            <p><strong>LinkedIn:</strong> {{ item['linkedin'] or 'Não informado' }}</p>
+            <p><strong>Pretensão salarial:</strong> {{ item['pretensao_salarial'] or 'Não informado' }}</p>
+            <p><strong>Disponibilidade:</strong> {{ item['disponibilidade'] or 'Não informado' }}</p>
+            <p><strong>Experiência:</strong> {{ item['experiencia'] or 'Não informado' }}</p>
+          </div>
         </div>
       </div>
-
-    </div>
-    {% endfor %}
-
+      {% endfor %}
+    {% else %}
+      <div class="sem-candidatos">
+        Nenhum candidato encontrado para este filtro.
+      </div>
+    {% endif %}
   </div>
 
 </body>
