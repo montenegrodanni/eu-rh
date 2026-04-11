@@ -94,9 +94,12 @@
     .form-box{
       background-color: white;
       border-radius: 20px;
-      padding: 35px;
+      padding: 50px;
+      border-radius: 20px;
+      margin-bottom: 35px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       border: 1px solid #e5e7eb;
+      margin-left: auto;
     }
 
     .form-box h2{
@@ -197,6 +200,54 @@
         padding: 25px;
       }
     }
+
+    .btn-voltar{
+    text-decoration: none;
+    background: white;
+    color: #1f2937;
+    border: 1px solid #d1d5db;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-voltar:hover{
+    background: #f9fafb;
+    transform: translateY(-1px);
+}
+
+.linha{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.linha{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.campo{
+  display: flex;
+  flex-direction: column;
+}
+
+.alerta-sucesso{
+  background: #d1fae5;
+  color: #065f46;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.form-box{
+  max-width: 800px;
+  margin: auto;
+}
+
   </style>
 </head>
 <body>
@@ -210,10 +261,9 @@
 
     <nav>
       <ul>
-        <li><a href="/">Início</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/login">Sair</a></li>
-      </ul>
+       <div class="menu">
+    <a href="javascript:history.back()" class="btn-voltar">← Voltar</a>
+</div>
     </nav>
   </div>
 </header>
@@ -253,28 +303,64 @@
       </div>
 
       <div class="duas-colunas">
-        <div class="grupo">
-          <label for="tipo_contrato">Tipo de contrato</label>
-          <select id="tipo_contrato" name="tipo_contrato" required>
-            <option value="">Selecione</option>
-            <option>CLT</option>
-            <option>PJ</option>
-            <option>Estágio</option>
-            <option>Temporário</option>
-          </select>
-        </div>
-
-        <div class="grupo">
-          <label for="localizacao">Localização</label>
-          <input type="text" id="localizacao" name="localizacao" placeholder="Ex.: Porto Alegre - RS" required>
-        </div>
-      </div>
-
-      <button type="submit" class="btn-salvar">Publicar vaga</button>
-    </form>
+  <div class="grupo">
+    <label for="tipo_contrato">Tipo de contrato</label>
+    <select id="tipo_contrato" name="tipo_contrato" required>
+      <option value="">Selecione</option>
+      <option>CLT</option>
+      <option>PJ</option>
+      <option>Estágio</option>
+      <option>Temporário</option>
+    </select>
   </div>
 
+  <div class="grupo">
+    <label for="modelo">Modelo de trabalho</label>
+    <select name="modelo">
+      <option>Presencial</option>
+      <option>Híbrido</option>
+      <option>Remoto</option>
+    </select>
+  </div>
 </div>
+
+<div class="duas-colunas">
+  <div class="grupo">
+    <label for="localizacao">Localização</label>
+    <input type="text" id="localizacao" name="localizacao" placeholder="Ex.: Porto Alegre - RS" required>
+  </div>
+
+  <div class="grupo">
+    <label for="turno">Turno</label>
+    <select name="turno">
+      <option>Manhã</option>
+      <option>Tarde</option>
+      <option>Noite</option>
+      <option>Integral</option>
+    </select>
+  </div>
+</div>
+
+<div class="grupo">
+  <label>Nível</label>
+  <select name="nivel">
+    <option>Júnior</option>
+    <option>Pleno</option>
+    <option>Sênior</option>
+  </select>
+</div>
+
+<button type="submit" class="btn-salvar" onclick="this.innerText='Publicando...'">
+  Publicar vaga
+</button>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alerta-sucesso">
+      {{ messages[0] }}
+    </div>
+  {% endif %}
+{% endwith %}
 
 </body>
 </html>

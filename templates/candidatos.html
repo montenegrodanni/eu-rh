@@ -87,15 +87,16 @@
     }
 
     .filtros-status a{
-      padding: 8px 14px;
-      border-radius: 8px;
-      background: white;
-      border: 1px solid #ccc;
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      font-size: 14px;
-    }
+  padding: 10px 15px;
+  border-radius: 999px;
+  background: white;
+  border: 1px solid #d1d5db;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 700;
+  font-size: 13px;
+  transition: 0.2s ease;
+}
 
     .filtros-status a:hover{
       background: #eef2ff;
@@ -108,12 +109,19 @@
     }
 
     .card{
-      background: white;
-      padding: 28px 30px;
-      border-radius: 16px;
-      margin-bottom: 18px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.10);
+}
 
     .card-topo{
       display: flex;
@@ -125,33 +133,33 @@
 
     .topo-esquerda{
       display: flex;
-      align-items: center;
-      gap: 16px;
+      align-items: flex-start;
+      gap: 24px;
       flex: 1;
       min-width: 320px;
     }
 
     .foto-candidato img{
-      width: 78px;
-      height: 78px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #e5e7eb;
-      background: #f9fafb;
-    }
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+  background: #f9fafb;
+}
 
     .card-info h3{
-      margin: 0 0 10px 0;
-      font-size: 24px;
-      color: #111827;
-    }
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  color: #111827;
+}
 
-    .card-info p{
-      margin: 6px 0;
-      color: #4b5563;
-      line-height: 1.5;
-      font-size: 15px;
-    }
+.card-info p{
+  margin: 6px 0;
+  color: #4b5563;
+  line-height: 1.5;
+  font-size: 14px;
+}
 
     .lado-direito{
       width: 300px;
@@ -212,47 +220,50 @@
     }
 
     .score-box{
-      margin-top: 4px;
-      padding-top: 12px;
-      border-top: 1px solid #e5e7eb;
-    }
+  margin-top: 6px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+}
 
-    .score-label{
-      font-size: 12px;
-      font-weight: bold;
-      color: #6b7280;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
+.score-label{
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 6px;
+}
 
-    .score-valor{
-      font-size: 18px;
-      font-weight: bold;
-      color: rgb(50, 50, 158);
-      margin-bottom: 6px;
-    }
+.score-valor{
+  font-size: 26px;
+  font-weight: 800;
+  color: rgb(50, 50, 158);
+  margin-bottom: 6px;
+}
 
     .barra-score{
-      width: 100%;
-      height: 8px;
-      background: #e5e7eb;
-      border-radius: 999px;
-      overflow: hidden;
-      margin: 6px 0 10px 0;
-    }
+  width: 100%;
+  height: 10px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 8px 0 12px 0;
+}
 
-    .barra-preenchida{
-      height: 100%;
-      border-radius: 999px;
-      background: #2563eb;
-    }
+.barra-preenchida{
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+}
 
     .score-texto{
-      font-size: 13px;
-      font-weight: bold;
-      color: #1d4ed8;
-      margin-bottom: 8px;
-    }
+  font-size: 13px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 10px;
+}
 
     .motivos{
       font-size: 12px;
@@ -358,48 +369,108 @@
     color: #ef4444;
 }
 
-.btn-curriculo {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 12px;
-    background: #2563eb;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: bold;
+.modal-foto img{
+  max-width: 420px;
+  max-height: 420px;
+  border-radius: 12px;
+  background: white;
 }
 
-.btn-curriculo:hover {
-    background: #1d4ed8;
+.alerta{
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.alerta.sucesso{
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.alerta.esconder{
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
 .coluna-esquerda-candidato{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  height: 220px; /* controla a altura */
-}
-
-.btn-curriculo{
-  margin-top: auto; /* joga o botão para baixo */
-  margin-bottom: 10px;
+  gap: 14px;
 }
 
 .btn-curriculo{
   display: inline-block;
-  padding: 8px 12px;
+  margin-top: 14px;
+  padding: 10px 14px;
   background: #2563eb;
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.18);
+  transition: 0.2s ease;
 }
 
 .btn-curriculo:hover{
   background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.foto-click{
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.foto-click:hover{
+  transform: scale(1.05);
+}
+
+.modal-foto{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-foto img{
+  max-width: 300px;   /* 👈 tamanho menor */
+  max-height: 300px;
+  border-radius: 12px;
+  background: white;
+  padding: 5px;
+}
+
+.topo-pagina{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.titulo{
+  margin: 0 0 6px 0;
+  font-size: 28px;
+  color: #111827;
+}
+
+.subtitulo-pagina{
+  margin: 0;
+  font-size: 15px;
+  color: #6b7280;
 }
 
   </style>
@@ -413,13 +484,28 @@
         <div class="logo-icon">EU</div>
         <div class="logo-text">EU RH</div>
       </div>
+      
+{% with mensagens = get_flashed_messages(with_categories=true) %}
+  {% if mensagens %}
+    {% for categoria, msg in mensagens %}
+      <div class="alerta {{ categoria }}">
+        {{ msg }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
       <a href="/dashboard" class="btn-voltar">Voltar</a>
     </div>
   </header>
 
   <div class="container">
+    <div class="topo-pagina">
+  <div>
     <h2 class="titulo">Candidatos da vaga</h2>
+    <p class="subtitulo-pagina">Visualize, compare e avance com os melhores perfis para esta oportunidade.</p>
+  </div>
+</div>
 
     <div class="filtros-status">
       <a href="{{ url_for('ver_candidatos', vaga_id=vaga['id'], status='Todos') }}"
@@ -455,113 +541,104 @@
 
     {% if candidatos %}
       {% for item in candidatos %}
-{% set top = loop.index == 1 %}
 {% set top = loop.index == 1 and item['score'] >= 70 %}
-     <div class="card {% if top %}top-candidato{% endif %}">
-
-     
-        <div class="card-topo">
-          <div class="topo-esquerda">
+<div class="card {% if top %}top-candidato{% endif %}">
+  <div class="card-topo">
+    <div class="topo-esquerda">
   <div class="coluna-esquerda-candidato">
     <div class="foto-candidato">
-      {% if item['foto'] %}
-<img src="{{ url_for('download_curriculo', nome_arquivo=item['foto']) }}">
-{% else %}
-<img src="https://via.placeholder.com/78">
-{% endif %}
-    </div>
+  {% if item['foto'] %}
+    <img src="{{ url_for('servir_arquivo', nome=item['foto']) }}"
+         class="foto-click"
+         onclick="abrirFoto(this.src)">
+  {% else %}
+    <img src="https://via.placeholder.com/78">
+  {% endif %}
+</div>
 
     {% if item['arquivo_curriculo'] %}
-<a href="{{ url_for('download_curriculo', nome_arquivo=item['arquivo_curriculo']) }}"
-   target="_blank"
-   class="btn-curriculo">
-   📄 Ver currículo
-</a>
-{% else %}
-<span class="sem-curriculo">Sem currículo</span>
-{% endif %}
+      <a href="{{ url_for('download_curriculo', nome_arquivo=item['arquivo_curriculo']) }}"
+         target="_blank"
+         class="btn-curriculo">
+         📄 Ver currículo
+      </a>
+    {% endif %}
   </div>
 
   <div class="card-info">
     <h3>{{ item['nome'] }}</h3>
+{% if top %}
+  <span class="badge-top">🏆 Melhor candidato</span>
+{% endif %}
     <p>📧 {{ item['email'] or 'Não informado' }}</p>
     <p>📞 {{ item['telefone'] or 'Não informado' }}</p>
   </div>
 </div>
-          <div class="lado-direito">
-            <div class="status
-              {% if item['status'] == 'Recebido' %}recebido{% endif %}
-              {% if item['status'] == 'Em análise' %}analise{% endif %}
-              {% if item['status'] == 'Entrevista' %}entrevista{% endif %}
-              {% if item['status'] == 'Aprovado' %}aprovado{% endif %}
-              {% if item['status'] == 'Reprovado' %}reprovado{% endif %}">
-              {{ item['status'] }}
-            </div>
 
-            <form method="POST" action="{{ url_for('atualizar_status_candidato', id=item['id']) }}" class="form-status">
-              <select name="status" class="select-status">
-                <option value="Recebido" {% if item['status'] == 'Recebido' %}selected{% endif %}>Recebido</option>
-                <option value="Em análise" {% if item['status'] == 'Em análise' %}selected{% endif %}>Em análise</option>
-                <option value="Entrevista" {% if item['status'] == 'Entrevista' %}selected{% endif %}>Entrevista</option>
-                <option value="Aprovado" {% if item['status'] == 'Aprovado' %}selected{% endif %}>Aprovado</option>
-                <option value="Reprovado" {% if item['status'] == 'Reprovado' %}selected{% endif %}>Reprovado</option>
-              </select>
-              <button type="submit" class="btn-status">Salvar status</button>
-            </form>
+    <div class="lado-direito">
+      <div class="status
+        {% if item['status'] == 'Recebido' %}recebido{% endif %}
+        {% if item['status'] == 'Em análise' %}analise{% endif %}
+        {% if item['status'] == 'Entrevista' %}entrevista{% endif %}
+        {% if item['status'] == 'Aprovado' %}aprovado{% endif %}
+        {% if item['status'] == 'Reprovado' %}reprovado{% endif %}">
+        {{ item['status'] }}
+      </div>
 
-            <div class="score-box">
-              <div class="score-label">Compatibilidade</div>
-              <div class="score-valor 
-    {% if item['score'] >= 80 %}texto-alto
-    {% elif item['score'] >= 50 %}texto-medio
-    {% else %}texto-baixo
-    {% endif %}
-">
-    {{ item['score'] }}%
-</div>
+      <form method="POST" action="{{ url_for('atualizar_status_candidato', id=item['id']) }}" class="form-status">
+        <select name="status" class="select-status">
+          <option value="Recebido" {% if item['status'] == 'Recebido' %}selected{% endif %}>Recebido</option>
+          <option value="Em análise" {% if item['status'] == 'Em análise' %}selected{% endif %}>Em análise</option>
+          <option value="Entrevista" {% if item['status'] == 'Entrevista' %}selected{% endif %}>Entrevista</option>
+          <option value="Aprovado" {% if item['status'] == 'Aprovado' %}selected{% endif %}>Aprovado</option>
+          <option value="Reprovado" {% if item['status'] == 'Reprovado' %}selected{% endif %}>Reprovado</option>
+        </select>
+        <button type="submit" class="btn-status">Salvar status</button>
+      </form>
 
-              <div class="barra-score">
-                <div class="barra-preenchida 
-    {% if item['score'] >= 80 %}score-alto
-    {% elif item['score'] >= 50 %}score-medio
-    {% else %}score-baixo
-    {% endif %}
-" style="width: {{ item['score'] }}%;"></div>
-              </div>
+      <div class="score-box">
+        <div class="score-label">Compatibilidade</div>
+        <div class="score-valor">{{ item['score'] }}%</div>
 
-              <div class="score-texto">
-                {% if item['score'] >= 80 %}
-                  Alta compatibilidade
-                {% elif item['score'] >= 50 %}
-                  Boa compatibilidade
-                {% else %}
-                  Compatibilidade moderada
-                {% endif %}
-              </div>
-
-              <div class="motivos">
-                {% for motivo in item['motivos'] %}
-                  <div>✓ {{ motivo }}</div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
+        <div class="barra-score">
+          <div class="barra-preenchida" style="width: {{ item['score'] }}%;"></div>
         </div>
 
-        <div class="detalhes">
-          <div class="detalhes-grid">
-            <p><strong>Nacionalidade:</strong> {{ item['nacionalidade'] or 'Não informado' }}</p>
-            <p><strong>Escolaridade:</strong> {{ item['escolaridade'] or 'Não informado' }}</p>
-            <p><strong>Idioma(s):</strong> {{ item['idioma'] or 'Não informado' }}</p>
-            <p><strong>Cidade:</strong> {{ item['cidade'] or 'Não informado' }}</p>
-            <p><strong>Estado:</strong> {{ item['estado'] or 'Não informado' }}</p>
-            <p><strong>LinkedIn:</strong> {{ item['linkedin'] or 'Não informado' }}</p>
-            <p><strong>Pretensão salarial:</strong> {{ item['pretensao_salarial'] or 'Não informado' }}</p>
-            <p><strong>Disponibilidade:</strong> {{ item['disponibilidade'] or 'Não informado' }}</p>
-            <p><strong>Experiência:</strong> {{ item['experiencia'] or 'Não informado' }}</p>
-          </div>
+        <div class="score-texto">
+          {% if item['score'] >= 80 %}
+            Alta compatibilidade
+          {% elif item['score'] >= 50 %}
+            Boa compatibilidade
+          {% else %}
+            Compatibilidade moderada
+          {% endif %}
+        </div>
+
+        <div class="motivos">
+          {% for motivo in item['motivos'] %}
+            <div>✓ {{ motivo }}</div>
+          {% endfor %}
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="detalhes">
+    <div class="detalhes-grid">
+      <p><strong>Nacionalidade:</strong> {{ item['nacionalidade'] or 'Não informado' }}</p>
+      <p><strong>Escolaridade:</strong> {{ item['escolaridade'] or 'Não informado' }}</p>
+      <p><strong>Idioma(s):</strong> {{ item['idioma'] or 'Não informado' }}</p>
+      <p><strong>Cidade:</strong> {{ item['cidade'] or 'Não informado' }}</p>
+      <p><strong>Estado:</strong> {{ item['estado'] or 'Não informado' }}</p>
+      <p><strong>LinkedIn:</strong> {{ item['linkedin'] or 'Não informado' }}</p>
+      <p><strong>Pretensão salarial:</strong> {{ item['pretensao_salarial'] or 'Não informado' }}</p>
+      <p><strong>Disponibilidade:</strong> {{ item['disponibilidade'] or 'Não informado' }}</p>
+      <p><strong>Experiência:</strong> {{ item['experiencia'] or 'Não informado' }}</p>
+    </div>
+  </div>
+</div>
+
+
       {% endfor %}
     {% else %}
       <div class="sem-candidatos">
@@ -569,6 +646,36 @@
       </div>
     {% endif %}
   </div>
+
+<script>
+  setTimeout(() => {
+    const alertas = document.querySelectorAll('.alerta')
+
+    alertas.forEach(alerta => {
+      alerta.classList.add('esconder')
+
+      setTimeout(() => {
+        alerta.remove()
+      }, 500)
+    })
+
+  }, 3000) // tempo: 3 segundos
+</script>
+
+<div id="modalFoto" class="modal-foto" onclick="fecharFoto()">
+  <img id="imagemModal">
+</div>
+
+<script>
+function abrirFoto(src){
+  document.getElementById('imagemModal').src = src;
+  document.getElementById('modalFoto').style.display = 'flex';
+}
+
+function fecharFoto(){
+  document.getElementById('modalFoto').style.display = 'none';
+}
+</script>
 
 </body>
 </html>

@@ -1,205 +1,389 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Candidatar-se - EU RH</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidatar-se - EU RH</title>
 
-<style>
-body{
-  font-family: Arial;
-  background: #f3f4f6;
-  margin: 0;
-}
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-header{
-  background: white;
-  padding: 20px 40px;
-  border-bottom: 1px solid #ddd;
-}
+    body{
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
 
-.logo{
-  font-size: 24px;
-  font-weight: bold;
-}
+    header{
+      background-color: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 18px 50px;
+    }
 
-.container{
-  max-width: 700px;
-  margin: auto;
-  padding: 30px 20px;
-}
+    .topo{
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
 
-.card{
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #0f2a56;
+    }
 
-.titulo{
-  margin-bottom: 5px;
-}
+    .logo-box{
+      background-color: rgb(206, 98, 47);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
 
-.subtitulo{
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
+    .btn-voltar{
+      text-decoration: none;
+      background: white;
+      color: #1f2937;
+      border: 1px solid #d1d5db;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
 
-.grupo{
-  margin-bottom: 15px;
-}
+    .btn-voltar:hover{
+      background: #f9fafb;
+      transform: translateY(-1px);
+    }
 
-.duas-colunas{
-  display: flex;
-  gap: 10px;
-}
+    .container{
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
 
-.duas-colunas .grupo{
-  flex: 1;
-}
+    .hero{
+      background: linear-gradient(90deg, rgb(50, 50, 158), rgb(113, 158, 196));
+      color: white;
+      padding: 38px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
 
-label{
-  font-weight: bold;
-  font-size: 14px;
-  display: block;
-  margin-bottom: 5px;
-}
+    .hero h1{
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
 
-input, textarea{
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
+    .hero p{
+      font-size: 16px;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
 
-textarea{
-  height: 80px;
-}
+    .card{
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border: 1px solid #e5e7eb;
+    }
 
-.btn-enviar{
-  width: 100%;
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 8px;
-  background: rgb(50, 50, 158);
-  color: white;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .titulo-secao{
+      font-size: 26px;
+      margin-bottom: 6px;
+      color: #111827;
+    }
 
-.voltar{
-  display: block;
-  margin-top: 15px;
-  text-align: center;
-  color: orange;
-  text-decoration: none;
-}
-</style>
+    .subtitulo{
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .box-vaga{
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 28px;
+    }
+
+    .box-vaga h3{
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #111827;
+    }
+
+    .duas-colunas{
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .grupo{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 18px;
+    }
+
+    label{
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 7px;
+      color: #374151;
+    }
+
+    input, select, textarea{
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus, select:focus, textarea:focus{
+      border-color: rgb(50, 50, 158);
+      box-shadow: 0 0 0 3px rgba(50, 50, 158, 0.12);
+    }
+
+    textarea{
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .btn-enviar{
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 10px;
+      background: rgb(50, 50, 158);
+      color: white;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-enviar:hover{
+      background: rgb(40, 40, 130);
+    }
+
+    .voltar-link{
+      display: block;
+      margin-top: 16px;
+      text-align: center;
+      color: rgb(206, 98, 47);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .voltar-link:hover{
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px){
+      header{
+        padding: 18px 20px;
+      }
+
+      .topo{
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero{
+        padding: 28px;
+      }
+
+      .hero h1{
+        font-size: 28px;
+      }
+
+      .duas-colunas{
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .card{
+        padding: 22px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">EU RH</div>
-</header>
-
-<div class="container">
-
-  <div class="card">
-    <h2 class="titulo">Seus dados</h2>
-    <p class="subtitulo">Informe seus dados e envie sua candidatura.</p>
-
-    <form method="POST" enctype="multipart/form-data">
-
-      <!-- DADOS PRINCIPAIS -->
-      <div class="grupo">
-        <label>Nome completo</label>
-        <input type="text" name="nome" placeholder="Digite seu nome completo" required>
+  <header>
+    <div class="topo">
+      <div class="logo">
+        <div class="logo-box">EU</div>
+        <span>EU RH</span>
       </div>
 
-      <div class="duas-colunas">
-        <div class="grupo">
-          <label>Email</label>
-          <input type="email" name="email" placeholder="Digite seu email" required>
+      <a href="javascript:history.back()" class="btn-voltar">← Voltar</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="hero">
+      <h1>Candidatar-se</h1>
+      <p>Preencha seus dados com atenção para enviar sua candidatura à vaga.</p>
+    </div>
+
+    <div class="card">
+      <h2 class="titulo-secao">Seus dados</h2>
+      <p class="subtitulo">Informe seus dados e envie sua candidatura.</p>
+
+      <div class="box-vaga">
+        <h3>Preferencias da vaga</h3>
+
+        <div class="duas-colunas">
+          <div class="grupo">
+            <label>Tipo de contrato</label>
+            <select name="tipo_contrato" form="form-candidatura">
+              <option value="">Selecione</option>
+              <option {{ 'selected' if vaga['tipo_contrato']=='CLT' else '' }}>CLT</option>
+              <option {{ 'selected' if vaga['tipo_contrato']=='PJ' else '' }}>PJ</option>
+              <option {{ 'selected' if vaga['tipo_contrato']=='Estagio' else '' }}>Estagio</option>
+              <option {{ 'selected' if vaga['tipo_contrato']=='Temporario' else '' }}>Temporario</option>
+            </select>
+          </div>
+
+          <div class="grupo">
+            <label>Modelo de trabalho</label>
+            <select name="modelo" form="form-candidatura">
+              <option value="">Selecione</option>
+              <option {{ 'selected' if vaga['modelo']=='Presencial' else '' }}>Presencial</option>
+              <option {{ 'selected' if vaga['modelo']=='Hibrido' else '' }}>Hibrido</option>
+              <option {{ 'selected' if vaga['modelo']=='Remoto' else '' }}>Remoto</option>
+            </select>
+          </div>
         </div>
 
-        <div class="grupo">
-          <label>Telefone</label>
-          <input type="text" name="telefone" placeholder="Digite seu telefone">
-        </div>
-      </div>
+        <div class="duas-colunas">
+          <div class="grupo">
+            <label>Turno</label>
+            <select name="turno" form="form-candidatura">
+              <option value="">Selecione</option>
+              <option {{ 'selected' if vaga['turno']=='Manha' else '' }}>Manha</option>
+              <option {{ 'selected' if vaga['turno']=='Tarde' else '' }}>Tarde</option>
+              <option {{ 'selected' if vaga['turno']=='Noite' else '' }}>Noite</option>
+              <option {{ 'selected' if vaga['turno']=='Integral' else '' }}>Integral</option>
+            </select>
+          </div>
 
-      <!-- NOVOS CAMPOS -->
-      <div class="duas-colunas">
-        <div class="grupo">
-          <label>Nacionalidade</label>
-          <input type="text" name="nacionalidade" placeholder="Ex: Brasileira">
-        </div>
-
-        <div class="grupo">
-          <label>Escolaridade</label>
-          <input type="text" name="escolaridade" placeholder="Ex: Ensino superior completo">
-        </div>
-      </div>
-
-      <div class="duas-colunas">
-        <div class="grupo">
-          <label>Idioma(s)</label>
-          <input type="text" name="idioma" placeholder="Ex: Português, Inglês intermediário">
-        </div>
-
-        <div class="grupo">
-          <label>Pretensão salarial</label>
-          <input type="text" name="pretensao_salarial" placeholder="Ex: R$ 3.000,00">
-        </div>
-      </div>
-
-      <div class="duas-colunas">
-        <div class="grupo">
-          <label>Cidade</label>
-          <input type="text" name="cidade" placeholder="Ex: Porto Alegre">
-        </div>
-
-        <div class="grupo">
-          <label>Estado</label>
-          <input type="text" name="estado" placeholder="Ex: RS">
+          <div class="grupo">
+          </div>
         </div>
       </div>
 
-      <div class="grupo">
-        <label>LinkedIn</label>
-        <input type="text" name="linkedin" placeholder="Cole o link do seu perfil">
-      </div>
+      <form id="form-candidatura" method="POST" enctype="multipart/form-data">
 
-      <div class="grupo">
-        <label>Disponibilidade</label>
-        <input type="text" name="disponibilidade" placeholder="Ex: Imediata">
-      </div>
+        <div class="grupo">
+          <label>Nome completo</label>
+          <input type="text" name="nome" placeholder="Digite seu nome completo" required>
+        </div>
 
-      <div class="grupo">
-        <label>Experiência profissional</label>
-        <textarea name="experiencia" placeholder="Descreva sua experiência profissional"></textarea>
-      </div>
+        <div class="duas-colunas">
+          <div class="grupo">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Digite seu email" required>
+          </div>
 
-      <!-- CURRICULO -->
-      <div class="grupo">
-        <label>Currículo em PDF</label>
-        <input type="file" name="arquivo_curriculo" accept=".pdf">
-      </div>
-      <input type="file" name="foto" accept="image/*">
+          <div class="grupo">
+            <label>Telefone</label>
+            <input type="text" name="telefone" placeholder="Digite seu telefone">
+          </div>
+        </div>
 
-      <!-- BOTÃO -->
-      <button type="submit" class="btn-enviar">Enviar candidatura</button>
+        <div class="duas-colunas">
+          <div class="grupo">
+            <label>Nacionalidade</label>
+            <input type="text" name="nacionalidade" placeholder="Ex: Brasileira">
+          </div>
 
-    </form>
+          <div class="grupo">
+            <label>Escolaridade</label>
+            <input type="text" name="escolaridade" placeholder="Ex: Ensino superior completo">
+          </div>
+        </div>
 
-    <a href="/vaga/{{ vaga_id }}" class="voltar">Voltar para a vaga</a>
+        <div class="duas-colunas">
+          <div class="grupo">
+            <label>Idioma(s)</label>
+            <input type="text" name="idioma" placeholder="Ex: Portugues, Ingles intermediario">
+          </div>
 
+          <div class="grupo">
+            <label>Pretensao salarial</label>
+            <input type="text" name="pretensao_salarial" placeholder="Ex: R$ 3.000,00">
+          </div>
+        </div>
+
+        <div class="duas-colunas">
+          <div class="grupo">
+            <label>Cidade</label>
+            <input type="text" name="cidade" placeholder="Ex: Porto Alegre">
+          </div>
+
+          <div class="grupo">
+            <label>Estado</label>
+            <input type="text" name="estado" placeholder="Ex: RS">
+          </div>
+        </div>
+
+        <div class="grupo">
+          <label>LinkedIn</label>
+          <input type="text" name="linkedin" placeholder="Cole o link do seu perfil">
+        </div>
+
+        <div class="grupo">
+          <label>Disponibilidade</label>
+          <input type="text" name="disponibilidade" placeholder="Ex: Imediata">
+        </div>
+
+        <div class="grupo">
+          <label>Experiencia profissional</label>
+          <textarea name="experiencia" placeholder="Descreva sua experiencia profissional"></textarea>
+        </div>
+
+        <div class="grupo">
+          <label>Curriculo em PDF</label>
+          <input type="file" name="arquivo_curriculo" accept=".pdf">
+        </div>
+
+        <div class="grupo">
+          <label>Adicionar foto</label>
+          <input type="file" name="foto" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn-enviar">Enviar candidatura</button>
+
+      </form>
+
+      <a href="javascript:history.back()" class="voltar-link">Voltar para a vaga</a>
+    </div>
   </div>
-
-</div>
 
 </body>
 </html>

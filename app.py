@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 import sqlite3
+from flask import flash
 import os
 import secrets
 from datetime import datetime, timedelta
@@ -230,32 +231,6 @@ def calcular_score(vaga, candidato):
 def home():
     return render_template('home.html')
 
-
-@app.route('/login', methods=['GET', 'POST'])
-def pagina_login():
-    if 'empresa_id' in session:
-        return redirect(url_for('dashboard'))
-
-    if request.method == 'POST':
-        email = request.form.get('email')
-        senha = request.form.get('senha')
-
-        conn = conectar_banco()
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM empresas WHERE email = ?', (email,))
-        empresa = cursor.fetchone()
-        conn.close()
-
-        if empresa and check_password_hash(empresa['senha'], senha):
-            session['empresa_id'] = empresa['id']
-            session['empresa_nome'] = empresa['nome']
-            return redirect(url_for('dashboard'))
-
-        return render_template('login.html', erro='Email ou senha inválidos')
-
-    return render_template('login.html')
-
-
 @app.route('/cadastro-empresa')
 def cadastro_empresa():
     return render_template('cadastro.html')
@@ -345,6 +320,88 @@ def dashboard():
         empresa_nome=session['empresa_nome']
     )
 
+@app.route('/empresa/candidatos')
+def candidatos_empresa():
+    if 'empresa_id' not in session:
+        return redirect(url_for('pagina_login'))
+
+    empresa_id = session['empresa_id']
+    status_filtro = request.args.get('status', 'Todos')
+
+    conn = sqlite3.connect('banco.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    # Pega todos os candidatos da empresa
+    cursor.execute('''
+        SELECT c.*, v.titulo AS titulo_vaga
+        FROM candidatos c
+        JOIN vagas v ON c.vaga_id = v.id
+        WHERE v.empresa_id = ?
+        ORDER BY c.id DESC
+    ''', (empresa_id,))
+
+    candidatos_db = cursor.fetchall()
+
+    candidatos = []
+
+    for c in candidatos_db:
+        if status_filtro == 'Todos' or c['status'] == status_filtro:
+            candidato = dict(c)
+            candidatos.append(candidato)
+
+    conn.close()
+
+    return render_template(
+        'candidatos_empresa.html',
+        candidatos=candidatos,
+        status_filtro=status_filtro
+    )
+
+@app.route('/login', methods=['GET', 'POST'])
+def pagina_login():
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip()
+        senha = request.form.get('senha', '').strip()
+
+        conn = conectar_banco()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            'SELECT id, nome, senha FROM empresas WHERE email = ?',
+            (email,)
+        )
+        empresa = cursor.fetchone()
+
+        conn.close()
+
+        if empresa and check_password_hash(empresa['senha'], senha):
+            session['empresa_id'] = empresa['id']
+            session['empresa_nome'] = empresa['nome']
+            return redirect(url_for('dashboard'))
+        else:
+            return 'Email ou senha inválidos.'
+
+    return render_template('login.html')
+
+@app.route('/minhas-vagas')
+def minhas_vagas():
+    if 'empresa_id' not in session:
+        return redirect(url_for('pagina_login'))
+
+    conn = conectar_banco()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        'SELECT * FROM vagas WHERE empresa_id = ? ORDER BY id DESC',
+        (session['empresa_id'],)
+    )
+    vagas = cursor.fetchall()
+
+    conn.close()
+
+    return render_template('minhas_vagas.html', vagas=vagas)
+
 
 @app.route('/criar-vaga')
 def pagina_criar_vaga():
@@ -362,7 +419,6 @@ def criar_vaga():
     descricao = request.form.get('descricao')
     setor = request.form.get('setor')
     salario = request.form.get('salario')
-    tipo_contrato = request.form.get('tipo_contrato')
     localizacao = request.form.get('localizacao')
 
     if not titulo or not descricao or not setor or not salario or not tipo_contrato or not localizacao:
@@ -371,13 +427,34 @@ def criar_vaga():
     conn = conectar_banco()
     cursor = conn.cursor()
 
+    modelo = request.form.get('modelo')
+    turno = request.form.get('turno')
+
     cursor.execute('''
-        INSERT INTO vagas (empresa_id, titulo, descricao, setor, salario, tipo_contrato, localizacao)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    ''', (session['empresa_id'], titulo, descricao, setor, salario, tipo_contrato, localizacao))
+    INSERT INTO candidatos (
+        vaga_id, nome, email, telefone, curriculo, arquivo_curriculo, status,
+        nacionalidade, escolaridade, idioma, cidade, estado, linkedin,
+        pretensao_salarial, disponibilidade, experiencia, foto,
+        tipo_contrato, modelo, turno
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+''', (
+    id, nome, email, telefone, curriculo, nome_arquivo, 'Recebido',
+    nacionalidade, escolaridade, idioma, cidade, estado, linkedin,
+    pretensao_salarial, disponibilidade, experiencia, foto_nome,
+    tipo_contrato, modelo, turno
+))
+
+    conn = sqlite3.connect('banco.db')
+    cursor = conn.cursor()
+
+    cursor.execute("ALTER TABLE vagas ADD COLUMN modelo TEXT")
+    cursor.execute("ALTER TABLE vagas ADD COLUMN turno TEXT")
 
     conn.commit()
     conn.close()
+       
+    flash("Vaga criada com sucesso!")
 
     return redirect(url_for('dashboard'))
 
@@ -485,21 +562,23 @@ def ver_vaga_publica(id):
 
 @app.route('/vaga/<int:id>/candidatar', methods=['GET', 'POST'])
 def candidatar(id):
+
+    conn = conectar_banco()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM vagas WHERE id = ?", (id,))
+    vaga = cursor.fetchone()
+
     if request.method == 'POST':
+
         nome = request.form.get('nome')
         email = request.form.get('email')
-        telefone = request.form.get('telefone')
-        curriculo = request.form.get('curriculo')
 
-        nacionalidade = request.form.get('nacionalidade')
-        escolaridade = request.form.get('escolaridade')
-        idioma = request.form.get('idioma')
-        cidade = request.form.get('cidade')
-        estado = request.form.get('estado')
-        linkedin = request.form.get('linkedin')
-        pretensao_salarial = request.form.get('pretensao_salarial')
-        disponibilidade = request.form.get('disponibilidade')
-        experiencia = request.form.get('experiencia')
+        tipo_contrato = request.form.get('tipo_contrato')
+        modelo = request.form.get('modelo')
+        turno = request.form.get('turno')
+
+        print(tipo_contrato, modelo, turno)
 
         arquivo = request.files.get('arquivo_curriculo')
         nome_arquivo = None
@@ -513,6 +592,8 @@ def candidatar(id):
                 arquivo.save(caminho_arquivo)
             else:
                 return 'Envie apenas arquivos PDF no currículo.'
+            
+            
 
         foto = request.files.get('foto')
         foto_nome = None
@@ -527,28 +608,11 @@ def candidatar(id):
             else:
                 return 'Envie a foto em PNG, JPG ou JPEG.'
 
-        conn = conectar_banco()
-        cursor = conn.cursor()
-
-        cursor.execute('''
-            INSERT INTO candidatos (
-                vaga_id, nome, email, telefone, curriculo, arquivo_curriculo, status,
-                nacionalidade, escolaridade, idioma, cidade, estado, linkedin,
-                pretensao_salarial, disponibilidade, experiencia, foto
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            id, nome, email, telefone, curriculo, nome_arquivo, 'Recebido',
-            nacionalidade, escolaridade, idioma, cidade, estado, linkedin,
-            pretensao_salarial, disponibilidade, experiencia, foto_nome
-        ))
-
-        conn.commit()
         conn.close()
-
         return render_template('sucesso.html', vaga_id=id)
 
-    return render_template('candidatar.html', vaga_id=id)
+    conn.close()
+    return render_template('candidatar.html', vaga=vaga)
 
 
 @app.route('/vaga/<int:vaga_id>/candidatos')
@@ -646,7 +710,13 @@ def atualizar_status_candidato(id):
     conn.commit()
     conn.close()
 
-    return redirect(request.referrer or url_for('dashboard'))
+    flash('Status atualizado com sucesso!', 'sucesso')
+
+    if not titulo or not descricao:
+
+        return "Preencha os campos obrigatórios"
+
+    return redirect(request.referrer)
 
 
 @app.route('/uploads/<nome_arquivo>')

@@ -2,58 +2,26 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}EU RH{% endblock %}</title>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background-color: #f5f6fa;
-        }
-
-        .navbar {
-            background: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .logo {
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .container {
-            padding: 30px;
-        }
-
-        .btn {
-            background: #f1c40f;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EU RH</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="navbar">
-    <div class="logo">EU RH</div>
-    <div>
-        <a href="/" class="btn">Início</a>
+    <div class="navbar">
+    <div class="nav-left">
+        <div class="logo">
+            <span class="logo-box">EU</span>
+            <span class="logo-text">EU RH</span>
+        </div>
+    </div>
+
+    <div class="nav-right">
+        <a href="{{ url_for('home') }}#empresas">Para empresas</a>
+        <a href="{{ url_for('listar_vagas') }}">Para Candidatos</a>
+        <a href="{{ url_for('home') }}#sobre">Sobre Nós</a>
+        <a href="{{ url_for('pagina_login') }}">Entrar</a>
     </div>
 </div>
-
-<div class="container">
-    {% block content %}{% endblock %}
-</div>
-
 </body>
 </html>
