@@ -700,6 +700,10 @@ def atualizar_status_candidato(id):
 
     novo_status = request.form.get('status')
 
+    if not novo_status:
+        flash('Selecione um status válido.', 'erro')
+        return redirect(request.referrer)
+
     conn = conectar_banco()
     cursor = conn.cursor()
 
@@ -713,13 +717,7 @@ def atualizar_status_candidato(id):
     conn.close()
 
     flash('Status atualizado com sucesso!', 'sucesso')
-
-    if not titulo or not descricao:
-
-        return "Preencha os campos obrigatórios"
-
     return redirect(request.referrer)
-
 
 @app.route('/uploads/<nome_arquivo>')
 def download_curriculo(nome_arquivo):
