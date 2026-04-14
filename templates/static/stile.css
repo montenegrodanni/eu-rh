@@ -1,0 +1,16 @@
+.navbar {
+    width: 100%;
+    background: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 18px 60px;
+}
+
+.flash-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
