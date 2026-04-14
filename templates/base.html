@@ -9,19 +9,22 @@
 <body>
 
     <div class="navbar">
-    <div class="nav-left">
-        <div class="logo">
-            <span class="logo-box">EU</span>
-            <span class="logo-text">EU RH</span>
+        <div class="nav-left">
+            <div class="logo">
+                <span class="logo-box">EU</span>
+                <span class="logo-text">EU RH</span>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <a href="{{ url_for('home') }}#empresas">Para empresas</a>
+            <a href="{{ url_for('listar_vagas') }}">Para Candidatos</a>
+            <a href="{{ url_for('home') }}#sobre">Sobre Nós</a>
+            <a href="{{ url_for('pagina_login') }}">Entrar</a>
         </div>
     </div>
 
-    <div class="nav-right">
-        <a href="{{ url_for('home') }}#empresas">Para empresas</a>
-        <a href="{{ url_for('listar_vagas') }}">Para Candidatos</a>
-        <a href="{{ url_for('home') }}#sobre">Sobre Nós</a>
-        <a href="{{ url_for('pagina_login') }}">Entrar</a>
-    </div>
-</div>
+    {% block content %}{% endblock %}
+
 </body>
 </html>

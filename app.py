@@ -241,40 +241,40 @@ def pagina_cadastro():
     return render_template('cadastro.html')
 
 
-@app.route('/cadastro', methods=['POST'])
+from werkzeug.security import generate_password_hash
+
+@app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
-    empresa = request.form.get('empresa')
-    email = request.form.get('email')
-    senha = request.form.get('senha')
-    confirmar_senha = request.form.get('confirmar_senha')
+    if request.method == 'POST':
+        nome = request.form.get('empresa')
+        email = request.form.get('email')
+        senha = generate_password_hash(request.form.get('senha'))
+        confirmar = request.form.get('confirmar_senha')
 
-    if not empresa or not email or not senha or not confirmar_senha:
-        return 'Preencha todos os campos.'
+        if request.form.get('senha') != confirmar:
+            return render_template('cadastro.html', erro="As senhas não coincidem")
 
-    if senha != confirmar_senha:
-        return 'As senhas não coincidem.'
+        conn = sqlite3.connect('banco.db')
+        cursor = conn.cursor()
 
-    conn = conectar_banco()
-    cursor = conn.cursor()
+        cursor.execute("SELECT * FROM empresas WHERE email = ?", (email,))
+        empresa_existente = cursor.fetchone()
 
-    cursor.execute('SELECT * FROM empresas WHERE email = ?', (email,))
-    empresa_existente = cursor.fetchone()
+        if empresa_existente:
+            conn.close()
+            return render_template('cadastro.html', erro="Email já cadastrado")
 
-    if empresa_existente:
+        cursor.execute("""
+            INSERT INTO empresas (nome, email, senha)
+            VALUES (?, ?, ?)
+        """, (nome, email, senha))
+
+        conn.commit()
         conn.close()
-        return 'Já existe uma empresa cadastrada com esse email.'
 
-    senha_hash = generate_password_hash(senha)
+        return redirect(url_for('pagina_login'))
 
-    cursor.execute('''
-        INSERT INTO empresas (nome, email, senha)
-        VALUES (?, ?, ?)
-    ''', (empresa, email, senha_hash))
-
-    conn.commit()
-    conn.close()
-
-    return redirect(url_for('pagina_login'))
+    return render_template('cadastro.html')
 
 
 @app.route('/dashboard')
@@ -360,6 +360,8 @@ def candidatos_empresa():
 
 @app.route('/login', methods=['GET', 'POST'])
 def pagina_login():
+    erro = None
+
     if request.method == 'POST':
         email = request.form.get('email', '').strip()
         senha = request.form.get('senha', '').strip()
@@ -380,9 +382,9 @@ def pagina_login():
             session['empresa_nome'] = empresa['nome']
             return redirect(url_for('dashboard'))
         else:
-            return 'Email ou senha inválidos.'
+            erro = "Email ou senha inválidos"
 
-    return render_template('login.html')
+    return render_template('login.html', erro=erro)
 
 @app.route('/minhas-vagas')
 def minhas_vagas():

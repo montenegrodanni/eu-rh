@@ -427,11 +427,22 @@
                     <h2>Entrar</h2>
                     <p>Faça login para acessar sua plataforma.</p>
 
-                    {% if erro %}
-                        <div class="erro-login">
-                            {{ erro }}
-                        </div>
-                    {% endif %}
+                        {% if erro %}
+<div id="mensagem-erro" style="
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #fecaca;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+">
+    {{ erro }}
+</div>
+{% endif %}
 
                     <form method="POST" action="{{ url_for('pagina_login') }}">
                         <div class="grupo-campo">
@@ -464,5 +475,20 @@
             </div>
         </section>
     </main>
+
+<script>
+    setTimeout(function() {
+        var msg = document.getElementById("mensagem-erro");
+        if (msg) {
+            msg.style.transition = "opacity 0.5s ease";
+            msg.style.opacity = "0";
+
+            setTimeout(function() {
+                msg.style.display = "none";
+            }, 500);
+        }
+    }, 3000);
+</script>
+
 </body>
 </html>
