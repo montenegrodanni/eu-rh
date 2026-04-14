@@ -297,6 +297,23 @@ html{
   margin-top: 2px;
 }
 
+.card-resumo {
+    display: block;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #111;
+    transition: 0.3s;
+}
+
+.card-resumo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+
+
 </style>
 </head>
 
@@ -322,25 +339,16 @@ html{
   <h2 class="titulo-dashboard">Painel da Empresa</h2>
   
  <div class="cards-resumo">
-  <a href="{{ url_for('minhas_vagas') }}" class="card-resumo-link">
-    <div class="card-resumo">
-      <div class="icone-card">📄</div>
-      <div>
-        <p class="label">Vagas abertas</p>
-<small class="subtexto">Gerencie suas vagas</small>
-<h3>{{ total_vagas }}</h3>
-      </div>
-    </div>
-  </a>
+  <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
+    <h3>{{ total_vagas }}</h3>
+    <p>Total de vagas</p>
+</a>
 
-  <a href="{{ url_for('candidatos_empresa', status='Todos') }}" class="card-resumo-link">
-    <div class="card-resumo">
-      <div class="icone-card">👥</div>
-      <div>
-        <p class="label">Candidatos</p>
-        <h3>{{ total_candidatos }}</h3>
-      </div>
-    </div>
+<a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
+    <h3>{{ total_candidatos }}</h3>
+    <p>Total de candidatos</p>
+</a>
+
   </a>
 
   <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="card-resumo-link">
