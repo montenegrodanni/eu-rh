@@ -4,48 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EU RH</title>
-
-    <!-- LINK DO CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<script src="{{ url_for('static', filename='script.js') }}"></script>
 <body>
 
     <div class="navbar">
-        <div class="nav-left">
-            <div class="logo">
-                <span class="logo-box">EU</span>
-                <span class="logo-text">EU RH</span>
-            </div>
-        </div>
-
-        <div class="nav-center">
-            <a href="{{ url_for('home') }}#empresas">Para empresas</a>
-            <a href="{{ url_for('listar_vagas') }}">Para Candidatos</a>
-            <a href="{{ url_for('home') }}#sobre">Sobre Nós</a>
-        </div>
-
-        <div class="nav-right">
-            <a href="{{ url_for('pagina_login') }}">Entrar</a>
+    <div class="nav-left">
+        <div class="logo">
+            <span class="logo-box">EU</span>
+            <span class="logo-text">EU RH</span>
         </div>
     </div>
+
+    <div class="nav-right">
+        {% if mostrar_botao_voltar %}
+            <a href="{{ url_for('dashboard') }}" class="btn-navbar-voltar">← Voltar ao Dashboard</a>
+        {% endif %}
+    </div>
+</div>
+
+</div>
 
     {% block content %}{% endblock %}
 
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <div class="flash-container">
-      {% for categoria, mensagem in messages %}
-        <div class="flash {{ categoria }}">
-          {{ mensagem }}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

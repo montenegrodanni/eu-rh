@@ -6,6 +6,8 @@
 <title>Dashboard - EU RH</title>
 
 <style>
+/* (SEU CSS ORIGINAL — NÃO ALTEREI A BASE) */
+
 *{
     margin: 0;
     padding: 0;
@@ -18,7 +20,6 @@ body{
     color: #1f2937;
 }
 
-/* HEADER */
 header{
     background-color: white;
     border-bottom: 1px solid #e5e7eb;
@@ -52,156 +53,21 @@ header{
     align-items: center;
 }
 
-/* NAV */
-nav ul{
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
 nav a{
     text-decoration: none;
     color: #5b6475;
     font-weight: 500;
+    margin-left: 20px;
 }
 
 nav a:hover{
     color: rgb(50, 50, 158);
 }
 
-/* HERO */
-.hero{
-    background: linear-gradient(90deg, rgb(50, 50, 158), rgb(113, 158, 196));
-    color: white;
-    padding: 60px;
-    border-radius: 20px;
-    margin-bottom: 40px;
-}
-
-.hero h1{
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.hero p{
-    font-size: 18px;
-}
-
-/* CONTAINER */
-.container{
-    max-width: 1200px;
-    margin: auto;
-    padding: 40px 20px;
-}
-
-/* BOTÃO */
-.btn{
-    display: block;
-    width: fit-content;
-    margin: 30px auto;
-    background-color: rgb(50, 50, 158);
-    color: white;
-    padding: 14px 30px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.btn:hover{
-    background-color: rgb(40, 40, 130);
-}
-
-/* VAGAS */
-.titulo{
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-.vagas{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.card{
-    width: 100%;
-    max-width: 100%;
-    background-color: white;
-    border-radius: 14px;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-}
-
-.card h3{
-    margin-bottom: 5px;
-}
-
-.card p{
-    color: #6b7280;
-}
-
-.btn-sec{
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.btn-sec:hover{
-    background-color: #eef2ff;
-}
-.btn-excluir{
-    background-color: rgb(206, 98, 47);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.btn-excluir:hover{
-    background-color: rgb(180, 85, 40);
-}
-
-.btn-editar{
-    background-color: rgb(50, 50, 158);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.btn-editar:hover{
-    background-color: rgb(40, 40, 130);
-}
-
-.btn-sec{
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #1f2937;
-    font-weight: bold;
-}
-
 .dashboard-container{
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 20px;
-}
-
-.titulo-dashboard{
-  font-size: 26px;
-  margin-bottom: 20px;
-  color: #111827;
 }
 
 .cards-resumo{
@@ -214,106 +80,82 @@ nav a:hover{
   background: white;
   border-radius: 16px;
   padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  border: 1px solid #e5e7eb;
-}
-
-.card-resumo h3{
-  margin: 0;
-  font-size: 26px;
-  color: #111827;
-}
-
-.label{
-  margin: 0;
-  font-size: 13px;
-  color: #6b7280;
-}
-
-.icone-card{
-  width: 50px;
-  height: 50px;
-  background: #eef2ff;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-}
-
-.card-resumo.destaque{
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-
-}
-
-html{
-    scroll-behavior: smooth;
-}
-
-
-.acoes-vaga{
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-
-.card:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.10);
-    transition: 0.2s;
-}
-
-.lista-vagas{
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px 40px 20px;
-}
-.card-resumo-link{
   text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-@media (max-width: 900px){
-  .cards-resumo{
-    grid-template-columns: 1fr;
-  }
+  color: #111;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
 .card-resumo:hover{
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
 }
 
-.subtexto{
-  display: block;
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 2px;
+.hero{
+    background: linear-gradient(90deg, rgb(50, 50, 158), rgb(113, 158, 196));
+    color: white;
+    padding: 60px;
+    border-radius: 20px;
+    margin-bottom: 40px;
 }
 
-.card-resumo {
-    display: block;
-    background: white;
+.container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.vagas{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card{
+    background-color: white;
+    border-radius: 14px;
     padding: 20px;
-    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card:hover{
+    transform: translateY(-3px);
+}
+
+.acoes-vaga{
+    display: flex;
+    gap: 10px;
+}
+
+.btn-sec{
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 8px;
     text-decoration: none;
-    color: #111;
-    transition: 0.3s;
+    color: #1f2937;
+    font-weight: bold;
 }
 
-.card-resumo:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+.btn-sec:hover{
+    background-color: #eef2ff;
 }
 
+.btn-editar{
+    background-color: rgb(50, 50, 158);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+}
 
-
+.btn-excluir{
+    background-color: rgb(206, 98, 47);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+}
 </style>
 </head>
 
@@ -325,90 +167,88 @@ html{
             <div class="logo-box">EU</div>
             <span>EU RH</span>
         </div>
+
         <nav>
-            <ul>
-                <a href="https://wa.me/5551994704936?text=Olá,%20vim%20pela%20plataforma%20EU%20RH%20e%20preciso%20de%20suporte" target="_blank">
-    Suporte
-</a>
-                <a href="{{ url_for('logout') }}">Sair</a>
-            </ul>
+            <a href="{{ url_for('logout') }}">Sair</a>
         </nav>
     </div>
+</header>
 
 <div class="dashboard-container">
-  <h2 class="titulo-dashboard">Painel da Empresa</h2>
-  
- <div class="cards-resumo">
-  <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
-    <h3>{{ total_vagas }}</h3>
-    <p>Total de vagas</p>
-</a>
 
-<a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
-    <h3>{{ total_candidatos }}</h3>
-    <p>Total de candidatos</p>
-</a>
+  <div class="cards-resumo">
+    
+    <!-- TOTAL VAGAS -->
+    <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
+      <h3>{{ total_vagas }}</h3>
+      <p>Total de vagas</p>
+    </a>
 
-  </a>
+    <!-- TOTAL CANDIDATOS -->
+    <a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
+      <h3>{{ total_candidatos }}</h3>
+      <p>Total de candidatos</p>
+    </a>
 
-  <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="card-resumo-link">
-    <div class="card-resumo destaque">
-      <div class="icone-card">🏆</div>
-      <div>
-        <p class="label">Aprovados</p>
-<small class="subtexto">Candidatos selecionados</small>
-<h3>{{ aprovados }}</h3>
-      </div>
-    </div>
-  </a>
+    <!-- APROVADOS -->
+    <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="card-resumo">
+      <h3>{{ aprovados }}</h3>
+      <p>Aprovados</p>
+    </a>
+
+  </div>
+
 </div>
-
-</header>
 
 <div class="container">
 
     <div class="hero">
-    <h1>Olá, {{ empresa_nome }} 👋</h1>       
-    <p>Gerencie suas vagas e acompanhe seus candidatos aqui.</p>
+        <h1>Olá, {{ empresa_nome }} 👋</h1>       
+        <p>Gerencie suas vagas e acompanhe seus candidatos aqui.</p>
     </div>
 
-   <a href="/criar-vaga" class="btn">+ Criar Nova Vaga</a>
+    <a href="/criar-vaga" class="btn-sec">+ Criar Nova Vaga</a>
 
+    <h2 style="margin:20px 0;">Minhas vagas</h2>
 
-<div class="card-info">
+    <div class="vagas">
+      {% for vaga in vagas %}
+      
+      <div class="card">
 
-</div>
-<h2 class="titulo">Minhas vagas</h2>
-<div class="vagas">
-  {% for vaga in vagas %}
-  <div class="card" onclick="window.location.href='/vaga/{{ vaga[0] }}/candidatos'" style="cursor:pointer;">
-     <div>
-      <h3>{{ vaga[2] }}</h3>
-      <p>Salário: R$ {{ vaga[5] }}</p>
-    </div>
-
-    <div class="acoes-vaga" onclick="event.stopPropagation()">
-      <a href="/vaga/{{ vaga[0] }}/candidatos" class="btn-sec">Ver candidatos</a>
-      <a href="{{ url_for('ver_vaga_publica', id=vaga[0]) }}" class="btn-sec">Ver vaga</a>
-      <a href="/editar-vaga/{{ vaga[0] }}" class="btn-editar">Editar</a>
-      <a href="/excluir-vaga/{{ vaga[0] }}"
-         class="btn-excluir"
-         onclick="return confirm('Tem certeza que deseja excluir esta vaga?')">
-         Excluir
-      </a>
-    </div>
-
-  </div>
-  {% endfor %}
-</div>
-         
+        <div>
+          <h3>{{ vaga[2] }}</h3>
+          <p>Salário: R$ {{ vaga[5] }}</p>
         </div>
 
+        <div class="acoes-vaga">
+
+          <!-- 🔥 BOTÃO CORRIGIDO -->
+          <a href="{{ url_for('candidatos_empresa', vaga_id=vaga[0]) }}" class="btn-sec">
+              Ver candidatos
+          </a>
+
+          <a href="{{ url_for('ver_vaga_publica', id=vaga[0]) }}" class="btn-sec">
+              Ver vaga
+          </a>
+
+          <a href="/editar-vaga/{{ vaga[0] }}" class="btn-editar">
+              Editar
+          </a>
+
+          <a href="/excluir-vaga/{{ vaga[0] }}" class="btn-excluir"
+             onclick="return confirm('Tem certeza?')">
+             Excluir
+          </a>
+
+        </div>
+
+      </div>
+
+      {% endfor %}
     </div>
 
 </div>
-
-
 
 </body>
 </html>

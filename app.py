@@ -320,43 +320,50 @@ def dashboard():
         empresa_nome=session['empresa_nome']
     )
 
-@app.route('/empresa/candidatos')
+@app.route('/candidatos_empresa')
 def candidatos_empresa():
     if 'empresa_id' not in session:
         return redirect(url_for('pagina_login'))
+    
+    status_atual = request.args.get('status')
 
     empresa_id = session['empresa_id']
-    status_filtro = request.args.get('status', 'Todos')
+    status = request.args.get('status')
+    vaga_id = request.args.get('vaga_id')
 
-    conn = sqlite3.connect('banco.db')
-    conn.row_factory = sqlite3.Row
+    conn = conectar_banco()
     cursor = conn.cursor()
 
-    # Pega todos os candidatos da empresa
-    cursor.execute('''
-        SELECT c.*, v.titulo AS titulo_vaga
+    query = '''
+        SELECT c.*, v.titulo
         FROM candidatos c
         JOIN vagas v ON c.vaga_id = v.id
         WHERE v.empresa_id = ?
-        ORDER BY c.id DESC
-    ''', (empresa_id,))
+    '''
 
-    candidatos_db = cursor.fetchall()
+    params = [empresa_id]
 
-    candidatos = []
+    if vaga_id:
+        query += " AND v.id = ?"
+        params.append(vaga_id)
 
-    for c in candidatos_db:
-        if status_filtro == 'Todos' or c['status'] == status_filtro:
-            candidato = dict(c)
-            candidatos.append(candidato)
+    if status:
+        query += " AND c.status = ?"
+        params.append(status)
 
+    cursor.execute(query, tuple(params))
+
+    candidatos = cursor.fetchall()
     conn.close()
 
+    
+
     return render_template(
-        'candidatos_empresa.html',
-        candidatos=candidatos,
-        status_filtro=status_filtro
-    )
+    'candidatos_empresa.html',
+    candidatos=candidatos,
+    status_atual=status_atual,
+    mostrar_botao_voltar=True
+)
 
 @app.route('/login', methods=['GET', 'POST'])
 def pagina_login():

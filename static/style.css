@@ -1,0 +1,388 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+    color: #1f2937;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    background: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 18px 60px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+.nav-left {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-box {
+    background: rgb(180, 85, 40);
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+.nav-center {
+    justify-self: center;
+    display: flex;
+    gap: 28px;
+}
+
+.nav-right {
+    justify-self: end;
+}
+
+.nav-center a,
+.nav-right a {
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.nav-center a:hover,
+.nav-right a:hover {
+    color: #2563eb;
+}
+
+/* PÁGINA */
+.pagina-candidatos {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.topo-candidatos h2 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.topo-candidatos p {
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+/* FILTROS */
+.filtros-status {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.filtro-btn {
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    text-decoration: none;
+    color: #334155;
+    font-weight: 600;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.filtro-btn:hover {
+    background: #e2e8f0;
+}
+
+.filtro-btn.ativo {
+    background: #2b2f9b;
+    color: white;
+}
+
+/* CARDS */
+.lista-candidatos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-candidato {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-candidato h3 {
+    margin-bottom: 10px;
+}
+
+.info-candidato p {
+    margin-bottom: 5px;
+    color: #475569;
+}
+
+/* BOTÃO */
+.btn-acao {
+    background: #2b2f9b;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* STATUS */
+.status {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status.aprovado {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status.reprovado {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.status.emanálise {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.status.recebido {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+
+.topo-pagina-candidatos {
+    margin-bottom: 18px;
+}
+
+
+.topo-candidatos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+
+
+.header-candidatos {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-candidatos h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.topo-candidatos {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagina-candidatos {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.topo-candidatos {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+.topo-centro {
+    text-align: center;
+}
+
+.topo-centro h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+
+.topo-centro p {
+    font-size: 15px;
+    color: #64748b;
+    margin: 0;
+}
+
+
+.pagina-candidatos {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.topo-candidatos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-voltar {
+    align-self: flex-start;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #2f36b8;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.topo-candidatos h1 {
+    margin: 0;
+    text-align: center;
+}
+
+.topo-candidatos p {
+    margin: 4px 0 0;
+    text-align: center;
+    color: #64748b;
+}
+
+
+.filtros-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.filtros-status a {
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #eef2f7;
+    color: #1e293b;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #dbe2ea;
+}
+
+.filtros-status a.ativo {
+    background: #2f36b8;
+    color: white;
+    border-color: #2f36b8;
+}
+
+.card-candidato {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.info-candidato h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #0f172a;
+}
+
+.info-candidato p {
+    margin: 4px 0;
+    color: #334155;
+    font-size: 15px;
+}
+
+.acao-candidato {
+    display: flex;
+    align-items: center;
+}
+
+.btn-vaga {
+    background: #2f36b8;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn-vaga:hover {
+    background: #2530a5;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+    background: #ffffff;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.btn-navbar-voltar {
+    text-decoration: none;
+    color: #1f2937;
+    background: #f3f4f6;
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-navbar-voltar:hover {
+    background: #e5e7eb;
+}
+
+.topo-candidatos h1 {
+    margin-bottom: 18px;
+}
+
+.topo-candidatos p {
+    margin-bottom: 10px;
+}

@@ -1,216 +1,52 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Candidatos da Empresa</title>
+{% extends 'base.html' %}
 
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background: #f3f4f6;
-    margin: 0;
-}
+{% block content %}
 
-.container{
-    max-width: 1100px;
-    margin: auto;
-    padding: 30px;
-}
+    
 
-/* Título */
-.titulo{
-    font-size: 26px;
-    margin-bottom: 5px;
-}
+<div class="pagina-candidatos">
 
-.subtitulo{
-    color: #6b7280;
-    margin-bottom: 20px;
-}
+    
 
-/* Filtros */
-.filtros{
-    margin-bottom: 25px;
-}
+    <div class="topo-candidatos">
 
-.filtros a{
-    margin-right: 10px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    text-decoration: none;
-    border: 1px solid #d1d5db;
-    color: #374151;
-    font-weight: 600;
-    font-size: 13px;
-}
+    <h1>Candidatos da empresa</h1>
+    <p>Visualize todos os candidatos e filtre por status</p>
 
-.filtros a:hover{
-    background: #32329e;
-    color: white;
-}
-
-/* CARD */
-.card{
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
-    margin-bottom: 15px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-}
-
-/* Info */
-.info h3{
-    margin: 0;
-    font-size: 18px;
-}
-
-.info p{
-    margin: 4px 0;
-    font-size: 14px;
-    color: #4b5563;
-}
-
-/* Status */
-.status{
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.recebido{ background: #fef3c7; color: #92400e; }
-.aprovado{ background: #d1fae5; color: #047857; }
-
-/* Botão */
-.btn{
-    margin-top: 8px;
-    display: inline-block;
-    padding: 8px 12px;
-    background: #2563eb;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-
-.navbar{
-    width: 100%;
-    background: #ffffff;
-    border-bottom: 1px solid #d9d9d9;
-}
-
-.navbar-inner{
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 12px 24px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-container{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-icon{
-    width: 38px;
-    height: 38px;
-    background: #d96f32;
-    color: white;
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.logo-text{
-    font-weight: 700;
-    font-size: 18px;
-    color: #0f2a56;
-}
-
-.btn-voltar{
-    padding: 8px 16px;
-    border-radius: 8px;
-    background: #f3f4f6;
-    color: #111827;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-    border: 1px solid #d1d5db;
-}
-
-.btn-voltar:hover{
-    background: #e5e7eb;
-}
-</style>
-</head>
-
-
-<header class="navbar">
-    <div class="navbar-inner">
-
-        <div class="logo-container">
-            <div class="logo-icon">EU</div>
-            <div class="logo-text">EU RH</div>
-        </div>
-
-        <a href="{{ url_for('dashboard') }}" class="btn-voltar">
-            ← Voltar
-        </a>
-
-    </div>
-</header>
-<body>
-
-<div class="container">
-
-    <h2 class="titulo">Candidatos da empresa</h2>
-    <p class="subtitulo">Visualize todos os candidatos e filtre por status</p>
-
-    <div class="filtros">
-        <a href="{{ url_for('candidatos_empresa', status='Todos') }}">Todos</a>
-        <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}">Aprovados</a>
-    </div>
-
-    {% for c in candidatos %}
-    <div class="card">
-
-        <div class="info">
-            <h3>{{ c['nome'] }}</h3>
-            <p>📧 {{ c['email'] }}</p>
-            <p>📌 Vaga: {{ c['titulo_vaga'] }}</p>
-
-            <span class="status 
-                {% if c['status'] == 'Recebido' %}recebido{% endif %}
-                {% if c['status'] == 'Aprovado' %}aprovado{% endif %}
-            ">
-                {{ c['status'] }}
-            </span>
-        </div>
-
-        {% if c['arquivo_curriculo'] %}
-        <a href="{{ url_for('download_curriculo', nome_arquivo=c['arquivo_curriculo']) }}" target="_blank" class="btn">
-            Ver currículo
-        </a>
-        {% endif %}
-
-    </div>
-    {% endfor %}
+    
 
 </div>
 
-</body>
-</html>
+    <div class="filtros-status">
+        <a href="{{ url_for('candidatos_empresa') }}" class="{% if not status_atual %}ativo{% endif %}">Todos</a>
+        <a href="{{ url_for('candidatos_empresa', status='Recebido') }}" class="{% if status_atual == 'Recebido' %}ativo{% endif %}">Recebidos</a>
+        <a href="{{ url_for('candidatos_empresa', status='Em análise') }}" class="{% if status_atual == 'Em análise' %}ativo{% endif %}">Em análise</a>
+        <a href="{{ url_for('candidatos_empresa', status='Entrevista') }}" class="{% if status_atual == 'Entrevista' %}ativo{% endif %}">Entrevista</a>
+        <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="{% if status_atual == 'Aprovado' %}ativo{% endif %}">Aprovados</a>
+        <a href="{{ url_for('candidatos_empresa', status='Reprovado') }}" class="{% if status_atual == 'Reprovado' %}ativo{% endif %}">Reprovados</a>
+    </div>
+
+    {% if candidatos %}
+        {% for candidato in candidatos %}
+        <div class="card-candidato">
+            <div class="info-candidato">
+                <h3>{{ candidato.nome }}</h3>
+                <p><strong>Vaga:</strong> {{ candidato.titulo_vaga }}</p>
+                <p><strong>Email:</strong> {{ candidato.email }}</p>
+                <p><strong>Status:</strong> {{ candidato.status }}</p>
+            </div>
+
+            <div class="acao-candidato">
+                <a href="{{ url_for('ver_vaga_publica', id=candidato.vaga_id) }}" class="btn-vaga">
+    Ver vaga
+</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Nenhum candidato encontrado.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
