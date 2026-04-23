@@ -6,8 +6,6 @@
 <title>Dashboard - EU RH</title>
 
 <style>
-/* (SEU CSS ORIGINAL — NÃO ALTEREI A BASE) */
-
 *{
     margin: 0;
     padding: 0;
@@ -65,28 +63,35 @@ nav a:hover{
 }
 
 .dashboard-container{
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
 }
 
 .cards-resumo{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .card-resumo{
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  text-decoration: none;
-  color: #111;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    text-decoration: none;
+    color: #111;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
 }
 
 .card-resumo:hover{
-  transform: translateY(-4px);
+    transform: translateY(-4px);
+}
+
+.container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px 20px 40px;
 }
 
 .hero{
@@ -94,13 +99,53 @@ nav a:hover{
     color: white;
     padding: 60px;
     border-radius: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
-.container{
-    max-width: 1200px;
-    margin: auto;
-    padding: 40px 20px;
+.hero h1{
+    font-size: 46px;
+    margin-bottom: 10px;
+}
+
+.hero p{
+    font-size: 18px;
+}
+
+.painel-vagas{
+    background-color: white;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.topo-vagas{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px; /* espaçamento entre título e botão */
+    margin-bottom: 25px;
+}
+
+.topo-vagas h2{
+    font-size: 30px;
+    color: rgb(50, 50, 158);
+    margin: 0;
+}
+
+.btn-sec{
+    background-color: white;
+    border: 1px solid #d1d5db;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.btn-sec:hover{
+    background-color: #eef2ff;
+    border-color: rgb(50, 50, 158);
 }
 
 .vagas{
@@ -110,35 +155,37 @@ nav a:hover{
 }
 
 .card{
-    background-color: white;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: 14px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: 0.2s ease;
 }
 
 .card:hover{
     transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+}
+
+.info-vaga h3{
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+.info-vaga p{
+    font-size: 17px;
+    color: #4b5563;
 }
 
 .acoes-vaga{
     display: flex;
     gap: 10px;
-}
-
-.btn-sec{
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #1f2937;
-    font-weight: bold;
-}
-
-.btn-sec:hover{
-    background-color: #eef2ff;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .btn-editar{
@@ -147,6 +194,11 @@ nav a:hover{
     padding: 10px 15px;
     border-radius: 8px;
     text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-editar:hover{
+    opacity: 0.92;
 }
 
 .btn-excluir{
@@ -155,6 +207,35 @@ nav a:hover{
     padding: 10px 15px;
     border-radius: 8px;
     text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-excluir:hover{
+    opacity: 0.92;
+}
+
+@media (max-width: 900px){
+    .cards-resumo{
+        grid-template-columns: 1fr;
+    }
+
+    .card{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .acoes-vaga{
+        justify-content: flex-start;
+    }
+
+    .hero{
+        padding: 35px 25px;
+    }
+
+    .hero h1{
+        font-size: 32px;
+    }
 }
 </style>
 </head>
@@ -176,27 +257,24 @@ nav a:hover{
 
 <div class="dashboard-container">
 
-  <div class="cards-resumo">
-    
-    <!-- TOTAL VAGAS -->
-    <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
-      <h3>{{ total_vagas }}</h3>
-      <p>Total de vagas</p>
-    </a>
+    <div class="cards-resumo">
+        
+        <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
+            <h3>{{ total_vagas }}</h3>
+            <p>Total de vagas</p>
+        </a>
 
-    <!-- TOTAL CANDIDATOS -->
-    <a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
-      <h3>{{ total_candidatos }}</h3>
-      <p>Total de candidatos</p>
-    </a>
+        <a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
+            <h3>{{ total_candidatos }}</h3>
+            <p>Total de candidatos</p>
+        </a>
 
-    <!-- APROVADOS -->
-    <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="card-resumo">
-      <h3>{{ aprovados }}</h3>
-      <p>Aprovados</p>
-    </a>
+        <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="card-resumo">
+            <h3>{{ aprovados }}</h3>
+            <p>Aprovados</p>
+        </a>
 
-  </div>
+    </div>
 
 </div>
 
@@ -207,45 +285,47 @@ nav a:hover{
         <p>Gerencie suas vagas e acompanhe seus candidatos aqui.</p>
     </div>
 
-    <a href="/criar-vaga" class="btn-sec">+ Criar Nova Vaga</a>
+    <div class="painel-vagas">
 
-    <h2 style="margin:20px 0;">Minhas vagas</h2>
-
-    <div class="vagas">
-      {% for vaga in vagas %}
-      
-      <div class="card">
-
-        <div>
-          <h3>{{ vaga[2] }}</h3>
-          <p>Salário: R$ {{ vaga[5] }}</p>
+        <div class="topo-vagas">
+            <h2>Minhas vagas</h2>
+            <a href="/criar-vaga" class="btn-sec">+ Criar Nova Vaga</a>
         </div>
 
-        <div class="acoes-vaga">
+        <div class="vagas">
+            {% for vaga in vagas %}
+            
+            <div class="card">
 
-          <!-- 🔥 BOTÃO CORRIGIDO -->
-          <a href="{{ url_for('candidatos_empresa', vaga_id=vaga[0]) }}" class="btn-sec">
-              Ver candidatos
-          </a>
+                <div class="info-vaga">
+                    <h3>{{ vaga[2] }}</h3>
+                    <p>Salário: R$ {{ vaga[5] }}</p>
+                </div>
 
-          <a href="{{ url_for('ver_vaga_publica', id=vaga[0]) }}" class="btn-sec">
-              Ver vaga
-          </a>
+                <div class="acoes-vaga">
+                    <a href="{{ url_for('candidatos_empresa', vaga_id=vaga[0]) }}" class="btn-sec">
+                        Ver candidatos
+                    </a>
 
-          <a href="/editar-vaga/{{ vaga[0] }}" class="btn-editar">
-              Editar
-          </a>
+                    <a href="{{ url_for('ver_vaga_publica', id=vaga[0]) }}" class="btn-sec">
+                        Ver vaga
+                    </a>
 
-          <a href="/excluir-vaga/{{ vaga[0] }}" class="btn-excluir"
-             onclick="return confirm('Tem certeza?')">
-             Excluir
-          </a>
+                    <a href="/editar-vaga/{{ vaga[0] }}" class="btn-editar">
+                        Editar
+                    </a>
 
+                    <a href="/excluir-vaga/{{ vaga[0] }}" class="btn-excluir"
+                       onclick="return confirm('Tem certeza?')">
+                       Excluir
+                    </a>
+                </div>
+
+            </div>
+
+            {% endfor %}
         </div>
 
-      </div>
-
-      {% endfor %}
     </div>
 
 </div>
