@@ -237,6 +237,133 @@ nav a:hover{
         font-size: 32px;
     }
 }
+
+.vagas{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.card-vaga{
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 22px 24px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    transition: 0.25s ease;
+}
+
+.card-vaga:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.08);
+}
+
+.vaga-conteudo{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.vaga-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.info-vaga{
+    flex: 1;
+}
+
+.info-vaga h3{
+    font-size: 30px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.vaga-meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 16px;
+    color: #4b5563;
+}
+
+.vaga-meta span{
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 8px 12px;
+    border-radius: 999px;
+}
+
+.acoes-vaga{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-sec{
+    background-color: white;
+    border: 1px solid #d1d5db;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-sec:hover{
+    background-color: #eef2ff;
+    border-color: rgb(50, 50, 158);
+}
+
+.btn-editar{
+    background-color: rgb(50, 50, 158);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-editar:hover{
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.btn-excluir{
+    background-color: rgb(206, 98, 47);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-excluir:hover{
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 900px){
+    .vaga-topo{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .acoes-vaga{
+        justify-content: flex-start;
+    }
+
+    .info-vaga h3{
+        font-size: 24px;
+    }
+}
 </style>
 </head>
 
@@ -293,13 +420,17 @@ nav a:hover{
         </div>
 
         <div class="vagas">
-            {% for vaga in vagas %}
-            
-            <div class="card">
+    {% for vaga in vagas %}
+    
+    <div class="card-vaga">
 
+        <div class="vaga-conteudo">
+            <div class="vaga-topo">
                 <div class="info-vaga">
                     <h3>{{ vaga[2] }}</h3>
-                    <p>Salário: R$ {{ vaga[5] }}</p>
+                    <div class="vaga-meta">
+                        <span>💼 Salário: R$ {{ vaga[5] }}</span>
+                    </div>
                 </div>
 
                 <div class="acoes-vaga">
@@ -320,11 +451,13 @@ nav a:hover{
                        Excluir
                     </a>
                 </div>
-
             </div>
-
-            {% endfor %}
         </div>
+
+    </div>
+
+    {% endfor %}
+</div>
 
     </div>
 
