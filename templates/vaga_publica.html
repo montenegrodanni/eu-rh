@@ -112,6 +112,25 @@
     
 }
 
+.btn-topo{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: #f3f4f6;
+    color: #111827;
+    padding: 10px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.2s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.btn-topo:hover{
+    background: #e5e7eb;
+}
+
   </style>
 </head>
 <body>
@@ -128,8 +147,8 @@
 <div class="container">
   <div class="box">
     
-<a href="{{ url_for('dashboard') }}" style="background: blue; color: white; padding: 10px 16px; border-radius: 8px; text-decoration: none;">
-    Voltar ao dashboard
+<a href="{{ url_for('dashboard') }}" class="btn-topo">
+    Voltar
 </a>
     <h1>{{ vaga[2] }}</h1>
 
