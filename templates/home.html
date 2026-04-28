@@ -486,28 +486,79 @@ html{
     scroll-behavior:smooth;
 }
 
-#sobre-nos{
-    scroll-margin-top:90px;
+.sobre-nos{
+    padding:100px 20px;
+    background:linear-gradient(180deg, #ffffff, #f8fafc);
+    text-align:center;
 }
 
-.sobre-nos{
-    padding:90px 20px;
-    background:#ffffff;
-    text-align:center;
+.sobre-container{
+    max-width:1100px;
+    margin:0 auto;
+}
+
+.sobre-tag{
+    display:inline-block;
+    background:#eef2ff;
+    color:#32329e;
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:18px;
 }
 
 .sobre-nos h2{
     font-size:42px;
     color:#111827;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
 .sobre-nos p{
-    max-width:760px;
+    max-width:780px;
     margin:0 auto 18px;
     font-size:18px;
     line-height:1.7;
     color:#6b7280;
+}
+
+.sobre-cards{
+    margin-top:45px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+}
+
+.sobre-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:28px 24px;
+    text-align:left;
+    box-shadow:0 10px 25px rgba(15, 23, 42, 0.06);
+}
+
+.sobre-card h3{
+    font-size:22px;
+    color:#111827;
+    margin-bottom:12px;
+}
+
+.sobre-card p{
+    font-size:16px;
+    line-height:1.6;
+    color:#6b7280;
+    margin:0;
+}
+
+@media(max-width:900px){
+    .sobre-cards{
+        grid-template-columns:1fr;
+    }
+
+    .sobre-nos h2{
+        font-size:32px;
+    }
 }
   </style>
 </head>
@@ -585,15 +636,38 @@ html{
 </a>
 
 <section id="sobre-nos" class="sobre-nos">
-    <h2>Sobre Nós</h2>
+    <div class="sobre-container">
+        <span class="sobre-tag">Sobre o EU RH</span>
 
-    <p>
-        O EU RH nasceu para simplificar contratações e conectar empresas aos melhores talentos.
-    </p>
+        <h2>Recrutamento simples, organizado e inteligente</h2>
 
-    <p>
-        Plataforma moderna para divulgar vagas, receber currículos e organizar candidatos.
-    </p>
+        <p>
+            O <strong>EU RH</strong> nasceu para ajudar empresas a organizarem seus processos seletivos
+            de forma mais prática, moderna e eficiente.
+        </p>
+
+        <p>
+            Em uma única plataforma, empresas podem divulgar vagas, receber currículos,
+            acompanhar candidatos e tomar decisões com mais agilidade.
+        </p>
+
+        <div class="sobre-cards">
+            <div class="sobre-card">
+                <h3>Missão</h3>
+                <p>Simplificar o recrutamento e aproximar empresas dos talentos certos.</p>
+            </div>
+
+            <div class="sobre-card">
+                <h3>Visão</h3>
+                <p>Ser uma solução acessível e confiável para empresas que querem contratar melhor.</p>
+            </div>
+
+            <div class="sobre-card">
+                <h3>Valores</h3>
+                <p>Organização, tecnologia, agilidade, transparência e oportunidade.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 </body>
