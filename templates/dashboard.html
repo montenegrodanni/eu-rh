@@ -75,13 +75,54 @@ nav a:hover{
 }
 
 .card-resumo{
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    text-decoration: none;
-    color: #111;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    transition: 0.2s ease;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:26px 28px;
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    min-height:115px;
+
+    text-decoration:none;
+    color:#111827;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.04);
+}
+
+.icone-card{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    background:#eef2ff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+    flex-shrink:0;
+}
+
+.conteudo-card{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.conteudo-card h3{
+    margin:0;
+    font-size:34px;
+    line-height:1;
+    color:#111827;
+}
+
+.conteudo-card p{
+    margin-top:10px;
+    font-size:15px;
+    color:#6b7280;
 }
 
 .card-resumo:hover{
@@ -387,12 +428,13 @@ nav a:hover{
     <div class="cards-resumo">
 
         <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
-            <div class="icone-card">📄</div>
-            <div class="conteudo-card">
-                <h3>{{ total_vagas }}</h3>
-                <p>Vagas Ativas</p>
-            </div>
-        </a>
+    <div class="icone-card">📄</div>
+
+    <div class="conteudo-card">
+        <h3>{{ total_vagas }}</h3>
+        <p>Vagas Ativas</p>
+    </div>
+</a>
 
         <a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
             <div class="icone-card">👥</div>
