@@ -405,6 +405,57 @@ nav a:hover{
         font-size: 24px;
     }
 }
+
+.card-resumo{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:24px 26px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    min-height:110px;
+
+    text-decoration:none;
+    color:#111827;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.04);
+}
+
+.lado-esquerdo{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.icone-card{
+    width:56px;
+    height:56px;
+    border-radius:14px;
+    background:#eef2ff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+}
+
+.lado-esquerdo p{
+    margin:0;
+    font-size:16px;
+    color:#475569;
+    font-weight:600;
+}
+
+.card-resumo h3{
+    margin:0;
+    font-size:42px;
+    font-weight:700;
+    color:#111827;
+}
 </style>
 </head>
 
@@ -427,32 +478,32 @@ nav a:hover{
 
     <div class="cards-resumo">
 
-        <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
-    <div class="icone-card">📄</div>
+    <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
+        <div class="lado-esquerdo">
+            <div class="icone-card">📄</div>
+            <p>Vagas Ativas</p>
+        </div>
 
-    <div class="conteudo-card">
         <h3>{{ total_vagas }}</h3>
-        <p>Vagas Ativas</p>
-    </div>
-</a>
+    </a>
 
-        <a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
+    <a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
+        <div class="lado-esquerdo">
             <div class="icone-card">👥</div>
-            <div class="conteudo-card">
-                <h3>{{ total_candidatos }}</h3>
-                <p>Candidatos</p>
-            </div>
-        </a>
+            <p>Candidatos</p>
+        </div>
 
-        <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="card-resumo">
+        <h3>{{ total_candidatos }}</h3>
+    </a>
+
+    <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="card-resumo">
+        <div class="lado-esquerdo">
             <div class="icone-card">✅</div>
-            <div class="conteudo-card">
-                <h3>{{ aprovados }}</h3>
-                <p>Aprovados</p>
-            </div>
-        </a>
+            <p>Aprovados</p>
+        </div>
 
-    </div>
+        <h3>{{ aprovados }}</h3>
+    </a>
 
 </div>
 
