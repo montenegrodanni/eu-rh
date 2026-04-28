@@ -418,3 +418,58 @@ body {
     text-align:center;
     background:#f8f9fa;
 }
+
+.cards-resumo{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+    margin-bottom:28px;
+}
+
+.card-resumo{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:26px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    transition:0.25s ease;
+    box-shadow:0 8px 22px rgba(0,0,0,0.04);
+}
+
+.card-resumo:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(0,0,0,0.08);
+}
+
+.icone-card{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    background:#eef2ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+}
+
+.conteudo-card h3{
+    font-size:34px;
+    color:#111827;
+    margin:0;
+}
+
+.conteudo-card p{
+    margin-top:4px;
+    font-size:15px;
+    color:#6b7280;
+    font-weight:500;
+}
+
+@media(max-width:900px){
+    .cards-resumo{
+        grid-template-columns:1fr;
+    }
+}

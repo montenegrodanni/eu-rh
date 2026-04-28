@@ -385,20 +385,29 @@ nav a:hover{
 <div class="dashboard-container">
 
     <div class="cards-resumo">
-        
+
         <a href="{{ url_for('minhas_vagas') }}" class="card-resumo">
-            <h3>{{ total_vagas }}</h3>
-            <p>Total de vagas</p>
+            <div class="icone-card">📄</div>
+            <div class="conteudo-card">
+                <h3>{{ total_vagas }}</h3>
+                <p>Vagas Ativas</p>
+            </div>
         </a>
 
         <a href="{{ url_for('candidatos_empresa') }}" class="card-resumo">
-            <h3>{{ total_candidatos }}</h3>
-            <p>Total de candidatos</p>
+            <div class="icone-card">👥</div>
+            <div class="conteudo-card">
+                <h3>{{ total_candidatos }}</h3>
+                <p>Candidatos</p>
+            </div>
         </a>
 
         <a href="{{ url_for('candidatos_empresa', status='Aprovado') }}" class="card-resumo">
-            <h3>{{ aprovados }}</h3>
-            <p>Aprovados</p>
+            <div class="icone-card">✅</div>
+            <div class="conteudo-card">
+                <h3>{{ aprovados }}</h3>
+                <p>Aprovados</p>
+            </div>
         </a>
 
     </div>
