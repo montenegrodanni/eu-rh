@@ -8,7 +8,8 @@
 </head>
 <body>
 
-    <div class="navbar">
+<div class="navbar">
+
     <div class="nav-left">
         <div class="logo">
             <span class="logo-box">EU</span>
@@ -16,17 +17,31 @@
         </div>
     </div>
 
-    <div class="nav-right">
-        {% if mostrar_botao_voltar %}
-            <a href="{{ url_for('dashboard') }}" class="btn-navbar-voltar">← Voltar ao Dashboard</a>
-        {% endif %}
+    <div class="nav-center">
+        <a href="{{ url_for('home') }}">Início</a>
+        <a href="{{ url_for('home') }}#sobre-nos">Sobre Nós</a>
+        <a href="{{ url_for('home') }}#empresas">Para Empresas</a>
     </div>
-</div>
+
+    <div class="nav-right">
+
+        {% if mostrar_botao_voltar %}
+            <a href="{{ url_for('dashboard') }}" class="btn-navbar-voltar">
+                ← Dashboard
+            </a>
+        {% else %}
+            <a href="{{ url_for('pagina_login') }}" class="btn-entrar">
+                Entrar
+            </a>
+        {% endif %}
+
+    </div>
 
 </div>
 
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
 </html>
