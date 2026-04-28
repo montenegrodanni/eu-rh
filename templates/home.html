@@ -481,6 +481,34 @@
     font-weight: 700;
     color: #111827;
 }
+
+html{
+    scroll-behavior:smooth;
+}
+
+#sobre-nos{
+    scroll-margin-top:90px;
+}
+
+.sobre-nos{
+    padding:90px 20px;
+    background:#ffffff;
+    text-align:center;
+}
+
+.sobre-nos h2{
+    font-size:42px;
+    color:#111827;
+    margin-bottom:25px;
+}
+
+.sobre-nos p{
+    max-width:760px;
+    margin:0 auto 18px;
+    font-size:18px;
+    line-height:1.7;
+    color:#6b7280;
+}
   </style>
 </head>
 <body>
@@ -496,7 +524,7 @@
     <div class="nav-center">
         <a href="{{ url_for('cadastro_empresa') }}">Para empresas</a>
         <a href="{{ url_for('listar_vagas') }}">Para candidatos</a>
-        <a href="#sobre">Sobre nós</a>
+        <a href="{{ url_for('home') }}#sobre-nos">Sobre Nós</a>
     </div>
 
     <div><a href="{{ url_for('pagina_login') }}" class="btn-login">Entrar</a>
@@ -564,9 +592,8 @@
     </p>
 
     <p>
-        Uma plataforma moderna para divulgar vagas, receber currículos e organizar candidatos.
+        Plataforma moderna para divulgar vagas, receber currículos e organizar candidatos.
     </p>
-
 </section>
 
 </body>
