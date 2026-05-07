@@ -236,11 +236,6 @@ def cadastro_empresa():
     return render_template('cadastro.html')
 
 
-@app.route('/cadastro', methods=['GET'])
-def pagina_cadastro():
-    return render_template('cadastro.html')
-
-
 from werkzeug.security import generate_password_hash
 
 @app.route('/cadastro', methods=['GET', 'POST'])
