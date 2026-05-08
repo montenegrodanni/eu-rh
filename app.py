@@ -233,10 +233,8 @@ def home():
 
 @app.route('/cadastro-empresa')
 def cadastro_empresa():
-    return render_template('cadastro.html')
+    return redirect(url_for('cadastro'))
 
-
-from werkzeug.security import generate_password_hash
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
@@ -720,10 +718,6 @@ def atualizar_status_candidato(id):
 
     flash('Status atualizado com sucesso!', 'sucesso')
     return redirect(request.referrer)
-
-@app.route('/uploads/<nome_arquivo>')
-def download_curriculo(nome_arquivo):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], nome_arquivo)
 
 
 @app.route('/arquivo/<nome>')
