@@ -279,7 +279,7 @@
     <h2>Dados da vaga</h2>
     <p>Informe os detalhes da oportunidade para atrair os candidatos certos.</p>
 
-    <form action="/criar-vaga" method="post">
+    <form method="POST" action="{{ url_for('criar_vaga') }}">
       <div class="grupo">
         <label for="titulo">Título da vaga</label>
         <input type="text" id="titulo" name="titulo" placeholder="Ex.: Analista Administrativo" required>

@@ -405,17 +405,10 @@ def minhas_vagas():
     return render_template('minhas_vagas.html', vagas=vagas)
 
 
-@app.route('/criar-vaga')
-def pagina_criar_vaga():
-    if 'empresa_id' not in session:
-        return redirect(url_for('pagina_login'))
-    return render_template('criar_vaga.html')
-
-
-@app.route('/criar_vaga', methods=['GET', 'POST'])
+@app.route('/criar-vaga', methods=['GET', 'POST'])
 def criar_vaga():
     if "empresa_id" not in session:
-        return redirect(url_for("login"))
+        return redirect(url_for("pagina_login"))
 
     if request.method == "POST":
         titulo = request.form.get("titulo")
@@ -428,7 +421,7 @@ def criar_vaga():
         if not titulo or not descricao or not setor or not salario or not tipo_contrato or not localizacao:
             return "Preencha todos os campos obrigatórios"
 
-        conn = sqlite3.connect("banco.db")
+        conn = conectar_banco()
         cursor = conn.cursor()
 
         cursor.execute("""
