@@ -412,54 +412,45 @@ def pagina_criar_vaga():
     return render_template('criar_vaga.html')
 
 
-@app.route('/criar-vaga', methods=['POST'])
+@app.route('/criar_vaga', methods=['GET', 'POST'])
 def criar_vaga():
-    tipo_contrato = request.form.get("tipo_contrato")
-    if 'empresa_id' not in session:
-        return redirect(url_for('pagina_login'))
+    if "empresa_id" not in session:
+        return redirect(url_for("login"))
 
-    titulo = request.form.get('titulo')
-    descricao = request.form.get('descricao')
-    setor = request.form.get('setor')
-    salario = request.form.get('salario')
-    localizacao = request.form.get('localizacao')
+    if request.method == "POST":
+        titulo = request.form.get("titulo")
+        descricao = request.form.get("descricao")
+        setor = request.form.get("setor")
+        salario = request.form.get("salario")
+        tipo_contrato = request.form.get("tipo_contrato")
+        localizacao = request.form.get("localizacao")
 
-    if not titulo or not descricao or not setor or not salario or not tipo_contrato or not localizacao:
-        return 'Preencha todos os campos da vaga.'
+        if not titulo or not descricao or not setor or not salario or not tipo_contrato or not localizacao:
+            return "Preencha todos os campos obrigatórios"
 
-    conn = conectar_banco()
-    cursor = conn.cursor()
+        conn = sqlite3.connect("banco.db")
+        cursor = conn.cursor()
 
-    modelo = request.form.get('modelo')
-    turno = request.form.get('turno')
+        cursor.execute("""
+            INSERT INTO vagas 
+            (empresa_id, titulo, descricao, setor, salario, tipo_contrato, localizacao)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (
+            session["empresa_id"],
+            titulo,
+            descricao,
+            setor,
+            salario,
+            tipo_contrato,
+            localizacao
+        ))
 
-    cursor.execute('''
-    INSERT INTO candidatos (
-        vaga_id, nome, email, telefone, curriculo, arquivo_curriculo, status,
-        nacionalidade, escolaridade, idioma, cidade, estado, linkedin,
-        pretensao_salarial, disponibilidade, experiencia, foto,
-        tipo_contrato, modelo, turno
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-''', (
-    id, nome, email, telefone, curriculo, nome_arquivo, 'Recebido',
-    nacionalidade, escolaridade, idioma, cidade, estado, linkedin,
-    pretensao_salarial, disponibilidade, experiencia, foto_nome,
-    tipo_contrato, modelo, turno
-))
+        conn.commit()
+        conn.close()
 
-    conn = sqlite3.connect('banco.db')
-    cursor = conn.cursor()
+        return redirect(url_for("dashboard"))
 
-    cursor.execute("ALTER TABLE vagas ADD COLUMN modelo TEXT")
-    cursor.execute("ALTER TABLE vagas ADD COLUMN turno TEXT")
-
-    conn.commit()
-    conn.close()
-       
-    flash("Vaga criada com sucesso!")
-
-    return redirect(url_for('dashboard'))
+    return render_template("criar_vaga.html", mostrar_botao_voltar=True)
 
 
 @app.route('/editar-vaga/<int:id>')
