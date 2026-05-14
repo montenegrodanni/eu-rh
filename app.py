@@ -414,6 +414,7 @@ def pagina_criar_vaga():
 
 @app.route('/criar-vaga', methods=['POST'])
 def criar_vaga():
+    tipo_contrato = request.form.get("tipo_contrato")
     if 'empresa_id' not in session:
         return redirect(url_for('pagina_login'))
 
