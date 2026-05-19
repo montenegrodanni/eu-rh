@@ -329,7 +329,7 @@ def minhas_vagas():
     if 'empresa_id' not in session:
         return redirect(url_for('pagina_login'))
 
-    conn = conectar_banco()
+    conn = get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute(
