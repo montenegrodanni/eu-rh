@@ -277,7 +277,7 @@ def dashboard():
 
     empresa_id = session['empresa_id']
 
-    conn = conectar_banco()
+    conn = get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute('SELECT * FROM vagas WHERE empresa_id = ?', (empresa_id,))
