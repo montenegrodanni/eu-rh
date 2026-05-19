@@ -10,6 +10,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from services.database import get_db_connection
+from routes.auth import register_auth_routes
+
 
 app = Flask(__name__)
 app.secret_key = 'eurh_chave_secreta'
@@ -641,6 +643,7 @@ def atualizar_status_candidato(id):
 def servir_arquivo(nome):
     return send_from_directory(app.config['UPLOAD_FOLDER'], nome)
 
+register_auth_routes(app, enviar_email_recuperacao)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
