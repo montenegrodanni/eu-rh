@@ -366,13 +366,10 @@ def pagina_login():
         email = request.form.get('email', '').strip()
         senha = request.form.get('senha', '').strip()
 
-        conn = conectar_banco()
+        conn = get_db_connection()
         cursor = conn.cursor()
 
-        cursor.execute(
-            'SELECT id, nome, senha FROM empresas WHERE email = ?',
-            (email,)
-        )
+        cursor.execute("SELECT * FROM empresas WHERE email = ?", (email,))
         empresa = cursor.fetchone()
 
         conn.close()
