@@ -9,6 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from services.database import get_db_connection
 
 app = Flask(__name__)
 app.secret_key = 'eurh_chave_secreta'
@@ -30,9 +31,8 @@ app.config['SMTP_PORTA'] = 587
 
 
 def conectar_banco():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
 
 def arquivo_permitido(nome_arquivo):
@@ -40,7 +40,7 @@ def arquivo_permitido(nome_arquivo):
 
 
 def criar_banco():
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -247,7 +247,7 @@ def cadastro():
         if request.form.get('senha') != confirmar:
             return render_template('cadastro.html', erro="As senhas não coincidem")
 
-        conn = sqlite3.connect('banco.db')
+        conn = get_db_connection()
         cursor = conn.cursor()
 
         cursor.execute("SELECT * FROM empresas WHERE email = ?", (email,))
